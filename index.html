@@ -305,14 +305,14 @@
 <!-- KPI ROW -->
 <div class="kpi-row">
   <div class="kpi-card c-critico">
-    <div class="kpi-label">IDs Críticos</div>
-    <div class="kpi-value">57</div>
-    <div class="kpi-sub">Com pagamento programado</div>
+    <div class="kpi-label">🔴 IDs Críticos — BPP Pago ao Buyer</div>
+    <div class="kpi-value">187</div>
+    <div class="kpi-sub">Pagamento vencido · W28–W31</div>
   </div>
   <div class="kpi-card c-moderado">
-    <div class="kpi-label">IDs Moderados</div>
-    <div class="kpi-value">2.853</div>
-    <div class="kpi-sub">Com pagamento programado</div>
+    <div class="kpi-label">🔵 IDs Moderados — Em Aberto</div>
+    <div class="kpi-value">2.723</div>
+    <div class="kpi-sub">Pagamento futuro · W32–W34</div>
   </div>
   <div class="kpi-card c-total">
     <div class="kpi-label">Total IDs em risco</div>
@@ -321,8 +321,8 @@
   </div>
   <div class="kpi-card c-gmv">
     <div class="kpi-label">GMV Total em Risco</div>
-    <div class="kpi-value">$ 127,9k</div>
-    <div class="kpi-sub">USD · cashout potencial</div>
+    <div class="kpi-value">$ 129,1k</div>
+    <div class="kpi-sub">USD · $ 8,5k BPP pago ao buyer + $ 120,6k futuro</div>
   </div>
 </div>
 
@@ -332,7 +332,7 @@
   <div class="alert-banner">
     <span class="alert-icon">🚨</span>
     <div class="alert-text">
-      <strong>W31 e W32 · Amazonas + Maranhão</strong> são prioridade máxima: semanas com pagamento BPP <strong>já vencido</strong>. W31 tem 4 IDs críticos (USD 8,5k total) e W32 tem 11 críticos (USD 23,8k total) — ação imediata necessária para evitar cashout.
+      <strong>187 IDs com BPP já pagos — recuperar pacote para devolver.</strong> Pagamento ao comprador venceu antes de 03/08. Concentração em <strong>W31 · Amazonas (51 IDs · USD 4.312)</strong> e <strong>W31 · Maranhão (52 IDs · USD 1.251)</strong>. W32, W33 e W34 ainda estão em aberto — janela de ação disponível.
     </div>
   </div>
 
@@ -353,12 +353,12 @@
     <div class="week-header" onclick="toggleWeek(this)">
       <div class="week-title">
         <span>Semana W31</span>
-        <span class="week-pill pill-critico">🔴 Vencido</span>
+        <span class="week-pill pill-critico">🔴 BPP Perdido</span>
         <span style="font-size:12px;color:var(--muted);font-weight:400">Pagamentos 28 jul – 3 ago · <strong style="color:var(--critico)">PRAZO EXPIRADO</strong></span>
       </div>
       <div class="week-kpis">
         <span>IDs: <strong>184</strong></span>
-        <span>Críticos: <strong style="color:var(--critico)">4</strong></span>
+        <span>BPP Perdido: <strong style="color:var(--critico)">184</strong></span>
         <span>GMV: <strong>$ 8,5k</strong></span>
         <i class="chevron">▾</i>
       </div>
@@ -441,12 +441,12 @@
     <div class="week-header" onclick="toggleWeek(this)">
       <div class="week-title">
         <span>Semana W32</span>
-        <span class="week-pill pill-critico">🔴 Vencido</span>
-        <span style="font-size:12px;color:var(--muted);font-weight:400">Pagamentos 4–10 ago · <strong style="color:var(--critico)">PRAZO EXPIRADO</strong></span>
+        <span class="week-pill pill-atencao">🟠 Atenção</span>
+        <span style="font-size:12px;color:var(--muted);font-weight:400">Pagamentos 4–10 ago · Próximos dias</span>
       </div>
       <div class="week-kpis">
         <span>IDs: <strong>495</strong></span>
-        <span>Críticos: <strong style="color:var(--critico)">11</strong></span>
+        <span>Em aberto: <strong style="color:var(--alto)">495</strong></span>
         <span>GMV: <strong>$ 23,8k</strong></span>
         <i class="chevron">▾</i>
       </div>
@@ -465,45 +465,24 @@
         <tbody>
           <tr>
             <td class="uf-name">Pará</td>
-            <td><span class="badge-risk badge-critico"><span class="risk-dot dot-critico"></span>CRÍTICO</span></td>
-            <td class="num-right">1</td>
-            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-critico" style="width:100%"></div></div>$ 193</div></td>
-            <td class="num-right">0,8%</td>
-          </tr>
-          <tr>
-            <td class="uf-name">Pará</td>
             <td><span class="badge-risk badge-moderado"><span class="risk-dot dot-moderado"></span>MODERADO</span></td>
-            <td class="num-right">162</td>
-            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:96%"></div></div>$ 11.065</div></td>
-            <td class="num-right">46,5%</td>
-          </tr>
-          <tr>
-            <td class="uf-name">Amazonas</td>
-            <td><span class="badge-risk badge-critico"><span class="risk-dot dot-critico"></span>CRÍTICO</span></td>
-            <td class="num-right">5</td>
-            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-critico" style="width:82%"></div></div>$ 95</div></td>
-            <td class="num-right">0,4%</td>
+            <td class="num-right">163</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:100%"></div></div>$ 11.258</div></td>
+            <td class="num-right">47,3%</td>
           </tr>
           <tr>
             <td class="uf-name">Amazonas</td>
             <td><span class="badge-risk badge-moderado"><span class="risk-dot dot-moderado"></span>MODERADO</span></td>
-            <td class="num-right">81</td>
-            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:50%"></div></div>$ 5.773</div></td>
-            <td class="num-right">24,3%</td>
-          </tr>
-          <tr>
-            <td class="uf-name">Maranhão</td>
-            <td><span class="badge-risk badge-critico"><span class="risk-dot dot-critico"></span>CRÍTICO</span></td>
-            <td class="num-right">4</td>
-            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-critico" style="width:100%"></div></div>$ 393</div></td>
-            <td class="num-right">1,7%</td>
+            <td class="num-right">86</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:52%"></div></div>$ 5.868</div></td>
+            <td class="num-right">24,7%</td>
           </tr>
           <tr>
             <td class="uf-name">Maranhão</td>
             <td><span class="badge-risk badge-moderado"><span class="risk-dot dot-moderado"></span>MODERADO</span></td>
-            <td class="num-right">144</td>
-            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:29%"></div></div>$ 3.340</div></td>
-            <td class="num-right">14,0%</td>
+            <td class="num-right">148</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:33%"></div></div>$ 3.733</div></td>
+            <td class="num-right">15,7%</td>
           </tr>
           <tr>
             <td class="uf-name">Roraima</td>
@@ -516,21 +495,14 @@
             <td class="uf-name">Rondônia</td>
             <td><span class="badge-risk badge-moderado"><span class="risk-dot dot-moderado"></span>MODERADO</span></td>
             <td class="num-right">43</td>
-            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:9%"></div></div>$ 1.078</div></td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:10%"></div></div>$ 1.078</div></td>
             <td class="num-right">4,5%</td>
           </tr>
           <tr>
             <td class="uf-name">Piauí</td>
-            <td><span class="badge-risk badge-critico"><span class="risk-dot dot-critico"></span>CRÍTICO</span></td>
-            <td class="num-right">1</td>
-            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-critico" style="width:3%"></div></div>$ 4</div></td>
-            <td class="num-right">0,0%</td>
-          </tr>
-          <tr>
-            <td class="uf-name">Piauí</td>
             <td><span class="badge-risk badge-moderado"><span class="risk-dot dot-moderado"></span>MODERADO</span></td>
-            <td class="num-right">15</td>
-            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:4%"></div></div>$ 469</div></td>
+            <td class="num-right">16</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:4%"></div></div>$ 473</div></td>
             <td class="num-right">2,0%</td>
           </tr>
         </tbody>
@@ -543,12 +515,12 @@
     <div class="week-header" onclick="toggleWeek(this)">
       <div class="week-title">
         <span>Semana W33</span>
-        <span class="week-pill pill-atencao">🟠 Atenção</span>
+        <span class="week-pill pill-moderado">🔵 Moderado</span>
         <span style="font-size:12px;color:var(--muted);font-weight:400">Pagamentos 11–17 ago · Esta semana</span>
       </div>
       <div class="week-kpis">
         <span>IDs: <strong>1.146</strong></span>
-        <span>Críticos: <strong style="color:var(--critico)">18</strong></span>
+        <span>Em aberto: <strong style="color:var(--moderado)">1.146</strong></span>
         <span>GMV: <strong>$ 43,3k</strong></span>
         <i class="chevron">▾</i>
       </div>
@@ -567,38 +539,24 @@
         <tbody>
           <tr>
             <td class="uf-name">Amazonas</td>
-            <td><span class="badge-risk badge-critico"><span class="risk-dot dot-critico"></span>CRÍTICO</span></td>
-            <td class="num-right">14</td>
-            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-critico" style="width:100%"></div></div>$ 332</div></td>
-            <td class="num-right">0,8%</td>
-          </tr>
-          <tr>
-            <td class="uf-name">Amazonas</td>
             <td><span class="badge-risk badge-moderado"><span class="risk-dot dot-moderado"></span>MODERADO</span></td>
-            <td class="num-right">309</td>
-            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:100%"></div></div>$ 16.946</div></td>
-            <td class="num-right">39,1%</td>
+            <td class="num-right">323</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:100%"></div></div>$ 17.278</div></td>
+            <td class="num-right">39,9%</td>
           </tr>
           <tr>
             <td class="uf-name">Pará</td>
             <td><span class="badge-risk badge-moderado"><span class="risk-dot dot-moderado"></span>MODERADO</span></td>
             <td class="num-right">273</td>
-            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:75%"></div></div>$ 12.679</div></td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:73%"></div></div>$ 12.679</div></td>
             <td class="num-right">29,3%</td>
           </tr>
           <tr>
             <td class="uf-name">Maranhão</td>
-            <td><span class="badge-risk badge-critico"><span class="risk-dot dot-critico"></span>CRÍTICO</span></td>
-            <td class="num-right">4</td>
-            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-critico" style="width:85%"></div></div>$ 423</div></td>
-            <td class="num-right">1,0%</td>
-          </tr>
-          <tr>
-            <td class="uf-name">Maranhão</td>
             <td><span class="badge-risk badge-moderado"><span class="risk-dot dot-moderado"></span>MODERADO</span></td>
-            <td class="num-right">371</td>
-            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:49%"></div></div>$ 8.376</div></td>
-            <td class="num-right">19,3%</td>
+            <td class="num-right">375</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:51%"></div></div>$ 8.799</div></td>
+            <td class="num-right">20,3%</td>
           </tr>
           <tr>
             <td class="uf-name">Roraima</td>
@@ -625,48 +583,6 @@
       </table>
     </div>
   </div>
-
-  <!-- W32 -->
-  <div class="week-block" data-week="W32">
-    <div class="week-header" onclick="toggleWeek(this)">
-      <div class="week-title">
-        <span>Semana W32</span>
-        <span class="week-pill pill-atencao">🟠 Atenção</span>
-        <span style="font-size:12px;color:var(--muted);font-weight:400">Pagamentos 4–10 ago</span>
-      </div>
-      <div class="week-kpis">
-        <span>IDs: <strong>495</strong></span>
-        <span>Críticos: <strong style="color:var(--critico)">11</strong></span>
-        <span>GMV: <strong>$ 23,8k</strong></span>
-        <i class="chevron">▾</i>
-      </div>
-    </div>
-    <div class="week-body">
-      <table>
-        <thead>
-          <tr>
-            <th>UF</th>
-            <th>Classificação</th>
-            <th class="num-right">IDs</th>
-            <th>GMV (USD)</th>
-            <th>% do total W32</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="uf-name">Pará</td>
-            <td><span class="badge-risk badge-critico"><span class="risk-dot dot-critico"></span>CRÍTICO</span></td>
-            <td class="num-right">1</td>
-            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-critico" style="width:100%"></div></div>$ 193</div></td>
-            <td class="num-right">0,8%</td>
-          </tr>
-          <tr>
-            <td class="uf-name">Pará</td>
-            <td><span class="badge-risk badge-moderado"><span class="risk-dot dot-moderado"></span>MODERADO</span></td>
-            <td class="num-right">162</td>
-            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:96%"></div></div>$ 11.065</div></td>
-            <td class="num-right">46,5%</td>
-          </tr>
           <tr>
             <td class="uf-name">Amazonas</td>
             <td><span class="badge-risk badge-critico"><span class="risk-dot dot-critico"></span>CRÍTICO</span></td>
@@ -733,12 +649,12 @@
     <div class="week-header" onclick="toggleWeek(this)">
       <div class="week-title">
         <span>Semana W34</span>
-        <span class="week-pill pill-moderado">🔵 Programado</span>
+        <span class="week-pill pill-moderado">🔵 Moderado</span>
         <span style="font-size:12px;color:var(--muted);font-weight:400">Pagamentos 18–24 ago · Próxima semana</span>
       </div>
       <div class="week-kpis">
         <span>IDs: <strong>1.082</strong></span>
-        <span>Críticos: <strong style="color:var(--critico)">22</strong></span>
+        <span>Em aberto: <strong style="color:var(--moderado)">1.082</strong></span>
         <span>GMV: <strong>$ 53,5k</strong></span>
         <i class="chevron">▾</i>
       </div>
