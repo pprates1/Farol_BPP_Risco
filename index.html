@@ -1,1 +1,856 @@
-file:///C:/Users/pprates/Downloads/farol_bpp_imile%20(1).html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Farol BPP — IMILE DELIVERY</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:   #2D3277;
+    --yellow: #FFE600;
+    --critico: #C0392B;
+    --critico-bg: #FDECEA;
+    --alto: #E67E22;
+    --alto-bg: #FEF5EC;
+    --moderado: #2980B9;
+    --moderado-bg: #EAF4FB;
+    --ok: #27AE60;
+    --surface: #F4F5F9;
+    --white: #FFFFFF;
+    --text: #1A1D3B;
+    --muted: #6B7280;
+    --border: #E2E4EF;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--surface);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--navy);
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .header-bar {
+    background: var(--yellow);
+    height: 5px;
+    width: 100%;
+  }
+  .header-inner {
+    padding: 20px 32px 18px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .header-title {
+    color: #fff;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -.3px;
+  }
+  .header-title span {
+    color: var(--yellow);
+  }
+  .header-sub {
+    color: rgba(255,255,255,.55);
+    font-size: 12px;
+    margin-top: 2px;
+  }
+  .header-badge {
+    background: rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 20px;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 12px;
+    text-transform: uppercase;
+    letter-spacing: .6px;
+  }
+
+  /* ── KPI ROW ── */
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    padding: 24px 32px 0;
+  }
+  .kpi-card {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 16px 18px;
+    border-top: 3px solid var(--border);
+    box-shadow: 0 1px 3px rgba(0,0,0,.06);
+  }
+  .kpi-card.c-critico { border-top-color: var(--critico); }
+  .kpi-card.c-moderado { border-top-color: var(--moderado); }
+  .kpi-card.c-total { border-top-color: var(--navy); }
+  .kpi-card.c-gmv { border-top-color: var(--ok); }
+  .kpi-label { font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; }
+  .kpi-value { font-size: 28px; font-weight: 900; line-height: 1.1; margin-top: 4px; }
+  .kpi-card.c-critico .kpi-value { color: var(--critico); }
+  .kpi-card.c-moderado .kpi-value { color: var(--moderado); }
+  .kpi-card.c-total .kpi-value { color: var(--navy); }
+  .kpi-card.c-gmv .kpi-value { color: var(--ok); }
+  .kpi-sub { font-size: 11px; color: var(--muted); margin-top: 3px; }
+
+  /* ── MAIN CONTENT ── */
+  main {
+    padding: 24px 32px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  /* ── SECTION TITLE ── */
+  .section-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--navy);
+    text-transform: uppercase;
+    letter-spacing: .7px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── WEEK SECTIONS ── */
+  .week-block {
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 1px 4px rgba(0,0,0,.07);
+    overflow: hidden;
+  }
+  .week-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    user-select: none;
+  }
+  .week-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--navy);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .week-pill {
+    font-size: 11px;
+    font-weight: 700;
+    border-radius: 20px;
+    padding: 3px 10px;
+    text-transform: uppercase;
+    letter-spacing: .4px;
+  }
+  .pill-critico { background: var(--critico-bg); color: var(--critico); }
+  .pill-atencao  { background: var(--alto-bg);    color: var(--alto);    }
+  .pill-moderado { background: var(--moderado-bg);color: var(--moderado);}
+
+  .week-kpis {
+    display: flex;
+    gap: 24px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .week-kpis strong { color: var(--text); font-weight: 700; }
+
+  /* ── TABLE ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  thead tr {
+    background: var(--surface);
+  }
+  th {
+    text-align: left;
+    padding: 10px 16px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    border-bottom: 1px solid var(--border);
+  }
+  td {
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #FAFAFA; }
+
+  .risk-dot {
+    display: inline-block;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    margin-right: 7px;
+    flex-shrink: 0;
+  }
+  .dot-critico  { background: var(--critico); }
+  .dot-moderado { background: var(--moderado); }
+
+  .badge-risk {
+    display: inline-flex;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 700;
+    border-radius: 4px;
+    padding: 2px 8px;
+    text-transform: uppercase;
+    letter-spacing: .3px;
+  }
+  .badge-critico  { background: var(--critico-bg);  color: var(--critico); }
+  .badge-moderado { background: var(--moderado-bg); color: var(--moderado); }
+
+  .bar-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .bar-outer {
+    flex: 1;
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    min-width: 60px;
+  }
+  .bar-inner {
+    height: 100%;
+    border-radius: 3px;
+  }
+  .bar-critico  { background: var(--critico); }
+  .bar-moderado { background: var(--moderado); }
+
+  .uf-name { font-weight: 600; }
+  .num-right { text-align: right; font-variant-numeric: tabular-nums; }
+
+  /* ── ALERT BANNER ── */
+  .alert-banner {
+    background: var(--critico-bg);
+    border: 1.5px solid #F5C6C2;
+    border-radius: 10px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .alert-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+  .alert-text { font-size: 13px; color: #7B2020; line-height: 1.5; }
+  .alert-text strong { font-weight: 700; color: var(--critico); }
+
+  /* filter controls */
+  .controls {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 4px;
+  }
+  .ctrl-btn {
+    font-size: 12px;
+    font-weight: 600;
+    border: 1.5px solid var(--border);
+    border-radius: 20px;
+    padding: 5px 14px;
+    background: var(--white);
+    color: var(--muted);
+    cursor: pointer;
+    transition: all .15s;
+  }
+  .ctrl-btn:hover { border-color: var(--navy); color: var(--navy); }
+  .ctrl-btn.active { background: var(--navy); border-color: var(--navy); color: #fff; }
+
+  .chevron { transition: transform .2s; font-style: normal; }
+  .collapsed .chevron { transform: rotate(-90deg); }
+  .week-body { }
+  .week-body.hidden { display: none; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-bar"></div>
+  <div class="header-inner">
+    <div>
+      <div class="header-title">Farol BPP — <span>IMILE DELIVERY</span></div>
+      <div class="header-sub">Risco de pagamento BPP · Referência: 03/08/2026 · Base: SHP_DATE_PAY_BPP_BUYER</div>
+    </div>
+    <span class="header-badge">CCO Governança IC</span>
+  </div>
+</header>
+
+<!-- KPI ROW -->
+<div class="kpi-row">
+  <div class="kpi-card c-critico">
+    <div class="kpi-label">IDs Críticos</div>
+    <div class="kpi-value">57</div>
+    <div class="kpi-sub">Com pagamento programado</div>
+  </div>
+  <div class="kpi-card c-moderado">
+    <div class="kpi-label">IDs Moderados</div>
+    <div class="kpi-value">2.853</div>
+    <div class="kpi-sub">Com pagamento programado</div>
+  </div>
+  <div class="kpi-card c-total">
+    <div class="kpi-label">Total IDs em risco</div>
+    <div class="kpi-value">2.910</div>
+    <div class="kpi-sub">IMILE · todas as UFs</div>
+  </div>
+  <div class="kpi-card c-gmv">
+    <div class="kpi-label">GMV Total em Risco</div>
+    <div class="kpi-value">$ 127,9k</div>
+    <div class="kpi-sub">USD · cashout potencial</div>
+  </div>
+</div>
+
+<main>
+
+  <!-- ALERT -->
+  <div class="alert-banner">
+    <span class="alert-icon">🚨</span>
+    <div class="alert-text">
+      <strong>W31 e W32 · Amazonas + Maranhão</strong> são prioridade máxima: semanas com pagamento BPP <strong>já vencido</strong>. W31 tem 4 IDs críticos (USD 8,5k total) e W32 tem 11 críticos (USD 23,8k total) — ação imediata necessária para evitar cashout.
+    </div>
+  </div>
+
+  <!-- FILTER -->
+  <div>
+    <div class="section-title">Detalhamento por Semana de Pagamento &amp; UF</div>
+    <div class="controls">
+      <button class="ctrl-btn active" onclick="filterWeek('all',this)">Todas as semanas</button>
+      <button class="ctrl-btn" onclick="filterWeek('W31',this)">W31 🔴</button>
+      <button class="ctrl-btn" onclick="filterWeek('W32',this)">W32 🔴</button>
+      <button class="ctrl-btn" onclick="filterWeek('W33',this)">W33 🟠</button>
+      <button class="ctrl-btn" onclick="filterWeek('W34',this)">W34 🔵</button>
+    </div>
+  </div>
+
+  <!-- W31 -->
+  <div class="week-block" data-week="W31">
+    <div class="week-header" onclick="toggleWeek(this)">
+      <div class="week-title">
+        <span>Semana W31</span>
+        <span class="week-pill pill-critico">🔴 Vencido</span>
+        <span style="font-size:12px;color:var(--muted);font-weight:400">Pagamentos 28 jul – 3 ago · <strong style="color:var(--critico)">PRAZO EXPIRADO</strong></span>
+      </div>
+      <div class="week-kpis">
+        <span>IDs: <strong>184</strong></span>
+        <span>Críticos: <strong style="color:var(--critico)">4</strong></span>
+        <span>GMV: <strong>$ 8,5k</strong></span>
+        <i class="chevron">▾</i>
+      </div>
+    </div>
+    <div class="week-body">
+      <table>
+        <thead>
+          <tr>
+            <th>UF</th>
+            <th>Classificação</th>
+            <th class="num-right">IDs</th>
+            <th>GMV (USD)</th>
+            <th>% do total W31</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="uf-name">Amazonas</td>
+            <td><span class="badge-risk badge-critico"><span class="risk-dot dot-critico"></span>CRÍTICO</span></td>
+            <td class="num-right">1</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-critico" style="width:13%"></div></div>$ 11</div></td>
+            <td class="num-right">0,1%</td>
+          </tr>
+          <tr>
+            <td class="uf-name">Amazonas</td>
+            <td><span class="badge-risk badge-moderado"><span class="risk-dot dot-moderado"></span>MODERADO</span></td>
+            <td class="num-right">50</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:100%"></div></div>$ 4.301</div></td>
+            <td class="num-right">50,6%</td>
+          </tr>
+          <tr>
+            <td class="uf-name">Pará</td>
+            <td><span class="badge-risk badge-moderado"><span class="risk-dot dot-moderado"></span>MODERADO</span></td>
+            <td class="num-right">46</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:48%"></div></div>$ 2.059</div></td>
+            <td class="num-right">24,2%</td>
+          </tr>
+          <tr>
+            <td class="uf-name">Maranhão</td>
+            <td><span class="badge-risk badge-critico"><span class="risk-dot dot-critico"></span>CRÍTICO</span></td>
+            <td class="num-right">3</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-critico" style="width:100%"></div></div>$ 84</div></td>
+            <td class="num-right">1,0%</td>
+          </tr>
+          <tr>
+            <td class="uf-name">Maranhão</td>
+            <td><span class="badge-risk badge-moderado"><span class="risk-dot dot-moderado"></span>MODERADO</span></td>
+            <td class="num-right">49</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:27%"></div></div>$ 1.167</div></td>
+            <td class="num-right">13,7%</td>
+          </tr>
+          <tr>
+            <td class="uf-name">Roraima</td>
+            <td><span class="badge-risk badge-moderado"><span class="risk-dot dot-moderado"></span>MODERADO</span></td>
+            <td class="num-right">19</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:15%"></div></div>$ 657</div></td>
+            <td class="num-right">7,7%</td>
+          </tr>
+          <tr>
+            <td class="uf-name">Piauí</td>
+            <td><span class="badge-risk badge-moderado"><span class="risk-dot dot-moderado"></span>MODERADO</span></td>
+            <td class="num-right">13</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:4%"></div></div>$ 169</div></td>
+            <td class="num-right">2,0%</td>
+          </tr>
+          <tr>
+            <td class="uf-name">Rondônia</td>
+            <td><span class="badge-risk badge-moderado"><span class="risk-dot dot-moderado"></span>MODERADO</span></td>
+            <td class="num-right">3</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:1%"></div></div>$ 43</div></td>
+            <td class="num-right">0,5%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- W32 -->
+  <div class="week-block" data-week="W32">
+    <div class="week-header" onclick="toggleWeek(this)">
+      <div class="week-title">
+        <span>Semana W32</span>
+        <span class="week-pill pill-critico">🔴 Vencido</span>
+        <span style="font-size:12px;color:var(--muted);font-weight:400">Pagamentos 4–10 ago · <strong style="color:var(--critico)">PRAZO EXPIRADO</strong></span>
+      </div>
+      <div class="week-kpis">
+        <span>IDs: <strong>495</strong></span>
+        <span>Críticos: <strong style="color:var(--critico)">11</strong></span>
+        <span>GMV: <strong>$ 23,8k</strong></span>
+        <i class="chevron">▾</i>
+      </div>
+    </div>
+    <div class="week-body">
+      <table>
+        <thead>
+          <tr>
+            <th>UF</th>
+            <th>Classificação</th>
+            <th class="num-right">IDs</th>
+            <th>GMV (USD)</th>
+            <th>% do total W32</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="uf-name">Pará</td>
+            <td><span class="badge-risk badge-critico"><span class="risk-dot dot-critico"></span>CRÍTICO</span></td>
+            <td class="num-right">1</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-critico" style="width:100%"></div></div>$ 193</div></td>
+            <td class="num-right">0,8%</td>
+          </tr>
+          <tr>
+            <td class="uf-name">Pará</td>
+            <td><span class="badge-risk badge-moderado"><span class="risk-dot dot-moderado"></span>MODERADO</span></td>
+            <td class="num-right">162</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:96%"></div></div>$ 11.065</div></td>
+            <td class="num-right">46,5%</td>
+          </tr>
+          <tr>
+            <td class="uf-name">Amazonas</td>
+            <td><span class="badge-risk badge-critico"><span class="risk-dot dot-critico"></span>CRÍTICO</span></td>
+            <td class="num-right">5</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-critico" style="width:82%"></div></div>$ 95</div></td>
+            <td class="num-right">0,4%</td>
+          </tr>
+          <tr>
+            <td class="uf-name">Amazonas</td>
+            <td><span class="badge-risk badge-moderado"><span class="risk-dot dot-moderado"></span>MODERADO</span></td>
+            <td class="num-right">81</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:50%"></div></div>$ 5.773</div></td>
+            <td class="num-right">24,3%</td>
+          </tr>
+          <tr>
+            <td class="uf-name">Maranhão</td>
+            <td><span class="badge-risk badge-critico"><span class="risk-dot dot-critico"></span>CRÍTICO</span></td>
+            <td class="num-right">4</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-critico" style="width:100%"></div></div>$ 393</div></td>
+            <td class="num-right">1,7%</td>
+          </tr>
+          <tr>
+            <td class="uf-name">Maranhão</td>
+            <td><span class="badge-risk badge-moderado"><span class="risk-dot dot-moderado"></span>MODERADO</span></td>
+            <td class="num-right">144</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:29%"></div></div>$ 3.340</div></td>
+            <td class="num-right">14,0%</td>
+          </tr>
+          <tr>
+            <td class="uf-name">Roraima</td>
+            <td><span class="badge-risk badge-moderado"><span class="risk-dot dot-moderado"></span>MODERADO</span></td>
+            <td class="num-right">39</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:12%"></div></div>$ 1.346</div></td>
+            <td class="num-right">5,7%</td>
+          </tr>
+          <tr>
+            <td class="uf-name">Rondônia</td>
+            <td><span class="badge-risk badge-moderado"><span class="risk-dot dot-moderado"></span>MODERADO</span></td>
+            <td class="num-right">43</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:9%"></div></div>$ 1.078</div></td>
+            <td class="num-right">4,5%</td>
+          </tr>
+          <tr>
+            <td class="uf-name">Piauí</td>
+            <td><span class="badge-risk badge-critico"><span class="risk-dot dot-critico"></span>CRÍTICO</span></td>
+            <td class="num-right">1</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-critico" style="width:3%"></div></div>$ 4</div></td>
+            <td class="num-right">0,0%</td>
+          </tr>
+          <tr>
+            <td class="uf-name">Piauí</td>
+            <td><span class="badge-risk badge-moderado"><span class="risk-dot dot-moderado"></span>MODERADO</span></td>
+            <td class="num-right">15</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:4%"></div></div>$ 469</div></td>
+            <td class="num-right">2,0%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- W33 -->
+  <div class="week-block" data-week="W33">
+    <div class="week-header" onclick="toggleWeek(this)">
+      <div class="week-title">
+        <span>Semana W33</span>
+        <span class="week-pill pill-atencao">🟠 Atenção</span>
+        <span style="font-size:12px;color:var(--muted);font-weight:400">Pagamentos 11–17 ago · Esta semana</span>
+      </div>
+      <div class="week-kpis">
+        <span>IDs: <strong>1.146</strong></span>
+        <span>Críticos: <strong style="color:var(--critico)">18</strong></span>
+        <span>GMV: <strong>$ 43,3k</strong></span>
+        <i class="chevron">▾</i>
+      </div>
+    </div>
+    <div class="week-body">
+      <table>
+        <thead>
+          <tr>
+            <th>UF</th>
+            <th>Classificação</th>
+            <th class="num-right">IDs</th>
+            <th>GMV (USD)</th>
+            <th>% do total W33</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="uf-name">Amazonas</td>
+            <td><span class="badge-risk badge-critico"><span class="risk-dot dot-critico"></span>CRÍTICO</span></td>
+            <td class="num-right">14</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-critico" style="width:100%"></div></div>$ 332</div></td>
+            <td class="num-right">0,8%</td>
+          </tr>
+          <tr>
+            <td class="uf-name">Amazonas</td>
+            <td><span class="badge-risk badge-moderado"><span class="risk-dot dot-moderado"></span>MODERADO</span></td>
+            <td class="num-right">309</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:100%"></div></div>$ 16.946</div></td>
+            <td class="num-right">39,1%</td>
+          </tr>
+          <tr>
+            <td class="uf-name">Pará</td>
+            <td><span class="badge-risk badge-moderado"><span class="risk-dot dot-moderado"></span>MODERADO</span></td>
+            <td class="num-right">273</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:75%"></div></div>$ 12.679</div></td>
+            <td class="num-right">29,3%</td>
+          </tr>
+          <tr>
+            <td class="uf-name">Maranhão</td>
+            <td><span class="badge-risk badge-critico"><span class="risk-dot dot-critico"></span>CRÍTICO</span></td>
+            <td class="num-right">4</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-critico" style="width:85%"></div></div>$ 423</div></td>
+            <td class="num-right">1,0%</td>
+          </tr>
+          <tr>
+            <td class="uf-name">Maranhão</td>
+            <td><span class="badge-risk badge-moderado"><span class="risk-dot dot-moderado"></span>MODERADO</span></td>
+            <td class="num-right">371</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:49%"></div></div>$ 8.376</div></td>
+            <td class="num-right">19,3%</td>
+          </tr>
+          <tr>
+            <td class="uf-name">Roraima</td>
+            <td><span class="badge-risk badge-moderado"><span class="risk-dot dot-moderado"></span>MODERADO</span></td>
+            <td class="num-right">60</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:11%"></div></div>$ 1.946</div></td>
+            <td class="num-right">4,5%</td>
+          </tr>
+          <tr>
+            <td class="uf-name">Rondônia</td>
+            <td><span class="badge-risk badge-moderado"><span class="risk-dot dot-moderado"></span>MODERADO</span></td>
+            <td class="num-right">69</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:10%"></div></div>$ 1.639</div></td>
+            <td class="num-right">3,8%</td>
+          </tr>
+          <tr>
+            <td class="uf-name">Piauí</td>
+            <td><span class="badge-risk badge-moderado"><span class="risk-dot dot-moderado"></span>MODERADO</span></td>
+            <td class="num-right">46</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:6%"></div></div>$ 979</div></td>
+            <td class="num-right">2,3%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- W32 -->
+  <div class="week-block" data-week="W32">
+    <div class="week-header" onclick="toggleWeek(this)">
+      <div class="week-title">
+        <span>Semana W32</span>
+        <span class="week-pill pill-atencao">🟠 Atenção</span>
+        <span style="font-size:12px;color:var(--muted);font-weight:400">Pagamentos 4–10 ago</span>
+      </div>
+      <div class="week-kpis">
+        <span>IDs: <strong>495</strong></span>
+        <span>Críticos: <strong style="color:var(--critico)">11</strong></span>
+        <span>GMV: <strong>$ 23,8k</strong></span>
+        <i class="chevron">▾</i>
+      </div>
+    </div>
+    <div class="week-body">
+      <table>
+        <thead>
+          <tr>
+            <th>UF</th>
+            <th>Classificação</th>
+            <th class="num-right">IDs</th>
+            <th>GMV (USD)</th>
+            <th>% do total W32</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="uf-name">Pará</td>
+            <td><span class="badge-risk badge-critico"><span class="risk-dot dot-critico"></span>CRÍTICO</span></td>
+            <td class="num-right">1</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-critico" style="width:100%"></div></div>$ 193</div></td>
+            <td class="num-right">0,8%</td>
+          </tr>
+          <tr>
+            <td class="uf-name">Pará</td>
+            <td><span class="badge-risk badge-moderado"><span class="risk-dot dot-moderado"></span>MODERADO</span></td>
+            <td class="num-right">162</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:96%"></div></div>$ 11.065</div></td>
+            <td class="num-right">46,5%</td>
+          </tr>
+          <tr>
+            <td class="uf-name">Amazonas</td>
+            <td><span class="badge-risk badge-critico"><span class="risk-dot dot-critico"></span>CRÍTICO</span></td>
+            <td class="num-right">5</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-critico" style="width:82%"></div></div>$ 95</div></td>
+            <td class="num-right">0,4%</td>
+          </tr>
+          <tr>
+            <td class="uf-name">Amazonas</td>
+            <td><span class="badge-risk badge-moderado"><span class="risk-dot dot-moderado"></span>MODERADO</span></td>
+            <td class="num-right">81</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:50%"></div></div>$ 5.773</div></td>
+            <td class="num-right">24,3%</td>
+          </tr>
+          <tr>
+            <td class="uf-name">Maranhão</td>
+            <td><span class="badge-risk badge-critico"><span class="risk-dot dot-critico"></span>CRÍTICO</span></td>
+            <td class="num-right">4</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-critico" style="width:100%"></div></div>$ 393</div></td>
+            <td class="num-right">1,7%</td>
+          </tr>
+          <tr>
+            <td class="uf-name">Maranhão</td>
+            <td><span class="badge-risk badge-moderado"><span class="risk-dot dot-moderado"></span>MODERADO</span></td>
+            <td class="num-right">144</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:29%"></div></div>$ 3.340</div></td>
+            <td class="num-right">14,0%</td>
+          </tr>
+          <tr>
+            <td class="uf-name">Roraima</td>
+            <td><span class="badge-risk badge-moderado"><span class="risk-dot dot-moderado"></span>MODERADO</span></td>
+            <td class="num-right">39</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:12%"></div></div>$ 1.346</div></td>
+            <td class="num-right">5,7%</td>
+          </tr>
+          <tr>
+            <td class="uf-name">Rondônia</td>
+            <td><span class="badge-risk badge-moderado"><span class="risk-dot dot-moderado"></span>MODERADO</span></td>
+            <td class="num-right">43</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:9%"></div></div>$ 1.078</div></td>
+            <td class="num-right">4,5%</td>
+          </tr>
+          <tr>
+            <td class="uf-name">Piauí</td>
+            <td><span class="badge-risk badge-critico"><span class="risk-dot dot-critico"></span>CRÍTICO</span></td>
+            <td class="num-right">1</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-critico" style="width:3%"></div></div>$ 4</div></td>
+            <td class="num-right">0,0%</td>
+          </tr>
+          <tr>
+            <td class="uf-name">Piauí</td>
+            <td><span class="badge-risk badge-moderado"><span class="risk-dot dot-moderado"></span>MODERADO</span></td>
+            <td class="num-right">15</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:4%"></div></div>$ 469</div></td>
+            <td class="num-right">2,0%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- W34 -->
+  <div class="week-block" data-week="W34">
+    <div class="week-header" onclick="toggleWeek(this)">
+      <div class="week-title">
+        <span>Semana W34</span>
+        <span class="week-pill pill-moderado">🔵 Programado</span>
+        <span style="font-size:12px;color:var(--muted);font-weight:400">Pagamentos 18–24 ago · Próxima semana</span>
+      </div>
+      <div class="week-kpis">
+        <span>IDs: <strong>1.082</strong></span>
+        <span>Críticos: <strong style="color:var(--critico)">22</strong></span>
+        <span>GMV: <strong>$ 53,5k</strong></span>
+        <i class="chevron">▾</i>
+      </div>
+    </div>
+    <div class="week-body">
+      <table>
+        <thead>
+          <tr>
+            <th>UF</th>
+            <th>Classificação</th>
+            <th class="num-right">IDs</th>
+            <th>GMV (USD)</th>
+            <th>% do total W34</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="uf-name">Amazonas</td>
+            <td><span class="badge-risk badge-critico"><span class="risk-dot dot-critico"></span>CRÍTICO</span></td>
+            <td class="num-right">17</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-critico" style="width:100%"></div></div>$ 717</div></td>
+            <td class="num-right">1,3%</td>
+          </tr>
+          <tr>
+            <td class="uf-name">Amazonas</td>
+            <td><span class="badge-risk badge-moderado"><span class="risk-dot dot-moderado"></span>MODERADO</span></td>
+            <td class="num-right">386</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:100%"></div></div>$ 26.551</div></td>
+            <td class="num-right">49,6%</td>
+          </tr>
+          <tr>
+            <td class="uf-name">Pará</td>
+            <td><span class="badge-risk badge-critico"><span class="risk-dot dot-critico"></span>CRÍTICO</span></td>
+            <td class="num-right">1</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-critico" style="width:58%"></div></div>$ 810</div></td>
+            <td class="num-right">1,5%</td>
+          </tr>
+          <tr>
+            <td class="uf-name">Pará</td>
+            <td><span class="badge-risk badge-moderado"><span class="risk-dot dot-moderado"></span>MODERADO</span></td>
+            <td class="num-right">190</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:82%"></div></div>$ 10.932</div></td>
+            <td class="num-right">20,4%</td>
+          </tr>
+          <tr>
+            <td class="uf-name">Maranhão</td>
+            <td><span class="badge-risk badge-critico"><span class="risk-dot dot-critico"></span>CRÍTICO</span></td>
+            <td class="num-right">2</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-critico" style="width:2%"></div></div>$ 13</div></td>
+            <td class="num-right">0,0%</td>
+          </tr>
+          <tr>
+            <td class="uf-name">Maranhão</td>
+            <td><span class="badge-risk badge-moderado"><span class="risk-dot dot-moderado"></span>MODERADO</span></td>
+            <td class="num-right">279</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:59%"></div></div>$ 7.813</div></td>
+            <td class="num-right">14,6%</td>
+          </tr>
+          <tr>
+            <td class="uf-name">Roraima</td>
+            <td><span class="badge-risk badge-critico"><span class="risk-dot dot-critico"></span>CRÍTICO</span></td>
+            <td class="num-right">2</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-critico" style="width:10%"></div></div>$ 79</div></td>
+            <td class="num-right">0,1%</td>
+          </tr>
+          <tr>
+            <td class="uf-name">Roraima</td>
+            <td><span class="badge-risk badge-moderado"><span class="risk-dot dot-moderado"></span>MODERADO</span></td>
+            <td class="num-right">80</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:28%"></div></div>$ 3.659</div></td>
+            <td class="num-right">6,8%</td>
+          </tr>
+          <tr>
+            <td class="uf-name">Rondônia</td>
+            <td><span class="badge-risk badge-moderado"><span class="risk-dot dot-moderado"></span>MODERADO</span></td>
+            <td class="num-right">85</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:17%"></div></div>$ 2.262</div></td>
+            <td class="num-right">4,2%</td>
+          </tr>
+          <tr>
+            <td class="uf-name">Piauí</td>
+            <td><span class="badge-risk badge-moderado"><span class="risk-dot dot-moderado"></span>MODERADO</span></td>
+            <td class="num-right">40</td>
+            <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:5%"></div></div>$ 671</div></td>
+            <td class="num-right">1,3%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</main>
+
+<script>
+function toggleWeek(header) {
+  const block = header.parentElement;
+  const body = block.querySelector('.week-body');
+  const isHidden = body.classList.toggle('hidden');
+  header.classList.toggle('collapsed', isHidden);
+}
+
+function filterWeek(week, btn) {
+  document.querySelectorAll('.ctrl-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.week-block').forEach(block => {
+    if (week === 'all' || block.dataset.week === week) {
+      block.style.display = '';
+    } else {
+      block.style.display = 'none';
+    }
+  });
+}
+</script>
+</body>
+</html>
