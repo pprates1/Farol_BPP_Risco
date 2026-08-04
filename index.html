@@ -3,78 +3,76 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Farol BPP — IMILE DELIVERY</title>
+<title>Farol BPP — Todos os Carriers</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap');
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --navy: #2D3277; --yellow: #FFE600;
-    --critico: #C0392B; --critico-bg: #FDECEA;
-    --alto: #E67E22; --alto-bg: #FEF5EC;
-    --moderado: #2980B9; --moderado-bg: #EAF4FB;
-    --ok: #27AE60; --surface: #F4F5F9;
-    --white: #FFFFFF; --text: #1A1D3B;
-    --muted: #6B7280; --border: #E2E4EF;
-  }
-  body { font-family: 'Inter', sans-serif; background: var(--surface); color: var(--text); min-height: 100vh; }
-  header { background: var(--navy); padding: 0; display: flex; flex-direction: column; }
-  .header-bar { background: var(--yellow); height: 5px; width: 100%; }
-  .header-inner { padding: 20px 32px 18px; display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
-  .header-title { color: #fff; font-size: 22px; font-weight: 700; letter-spacing: -.3px; }
-  .header-title span { color: var(--yellow); }
-  .header-sub { color: rgba(255,255,255,.55); font-size: 12px; margin-top: 2px; }
-  .header-badge { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); border-radius: 20px; color: #fff; font-size: 11px; font-weight: 600; padding: 4px 12px; text-transform: uppercase; letter-spacing: .6px; }
-  .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; padding: 24px 32px 0; }
-  .kpi-card { background: var(--white); border-radius: 10px; padding: 16px 18px; border-top: 3px solid var(--border); box-shadow: 0 1px 3px rgba(0,0,0,.06); }
-  .kpi-card.c-critico { border-top-color: var(--critico); }
-  .kpi-card.c-moderado { border-top-color: var(--moderado); }
-  .kpi-card.c-total { border-top-color: var(--navy); }
-  .kpi-card.c-gmv { border-top-color: var(--ok); }
-  .kpi-label { font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; }
-  .kpi-value { font-size: 28px; font-weight: 900; line-height: 1.1; margin-top: 4px; }
-  .kpi-card.c-critico .kpi-value { color: var(--critico); }
-  .kpi-card.c-moderado .kpi-value { color: var(--moderado); }
-  .kpi-card.c-total .kpi-value { color: var(--navy); }
-  .kpi-card.c-gmv .kpi-value { color: var(--ok); }
-  .kpi-sub { font-size: 11px; color: var(--muted); margin-top: 3px; }
-  main { padding: 24px 32px 40px; display: flex; flex-direction: column; gap: 24px; }
-  .section-title { font-size: 13px; font-weight: 700; color: var(--navy); text-transform: uppercase; letter-spacing: .7px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
-  .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-  .alert-banner { background: var(--critico-bg); border: 1.5px solid #F5C6C2; border-radius: 10px; padding: 14px 18px; display: flex; align-items: flex-start; gap: 12px; }
-  .alert-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
-  .alert-text { font-size: 13px; color: #7B2020; line-height: 1.5; }
-  .alert-text strong { font-weight: 700; color: var(--critico); }
-  .controls { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 4px; }
-  .ctrl-btn { font-size: 12px; font-weight: 600; border: 1.5px solid var(--border); border-radius: 20px; padding: 5px 14px; background: var(--white); color: var(--muted); cursor: pointer; transition: all .15s; }
-  .ctrl-btn:hover { border-color: var(--navy); color: var(--navy); }
-  .ctrl-btn.active { background: var(--navy); border-color: var(--navy); color: #fff; }
-  .week-block { background: var(--white); border-radius: 12px; box-shadow: 0 1px 4px rgba(0,0,0,.07); overflow: hidden; }
-  .week-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; border-bottom: 1px solid var(--border); cursor: pointer; user-select: none; }
-  .week-title { font-size: 15px; font-weight: 700; color: var(--navy); display: flex; align-items: center; gap: 10px; }
-  .week-pill { font-size: 11px; font-weight: 700; border-radius: 20px; padding: 3px 10px; text-transform: uppercase; letter-spacing: .4px; }
-  .pill-critico { background: var(--critico-bg); color: var(--critico); }
-  .pill-atencao { background: var(--alto-bg); color: var(--alto); }
-  .pill-moderado { background: var(--moderado-bg); color: var(--moderado); }
-  .week-kpis { display: flex; gap: 24px; font-size: 12px; color: var(--muted); }
-  .week-kpis strong { color: var(--text); font-weight: 700; }
-  .btn-download { font-size: 11px; font-weight: 700; background: var(--navy); color: #fff; border: none; border-radius: 6px; padding: 5px 12px; cursor: pointer; flex-shrink: 0; transition: background .15s; letter-spacing: .3px; }
-  .btn-download:hover { background: #1a1f5c; }
-  .chevron { transition: transform .2s; font-style: normal; }
-  .collapsed .chevron { transform: rotate(-90deg); }
-  .week-body.hidden { display: none; }
-  table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  thead tr { background: var(--surface); }
-  th { text-align: left; padding: 10px 16px; font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; border-bottom: 1px solid var(--border); }
-  td { padding: 11px 16px; border-bottom: 1px solid var(--border); vertical-align: middle; }
-  tr:last-child td { border-bottom: none; }
-  tr:hover td { background: #FAFAFA; }
-  .bar-wrap { display: flex; align-items: center; gap: 8px; }
-  .bar-outer { flex: 1; height: 6px; background: var(--border); border-radius: 3px; min-width: 60px; }
-  .bar-inner { height: 100%; border-radius: 3px; }
-  .bar-critico { background: var(--critico); }
-  .bar-moderado { background: var(--moderado); }
-  .uf-name { font-weight: 600; }
-  .num-right { text-align: right; font-variant-numeric: tabular-nums; }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{--navy:#2D3277;--yellow:#FFE600;--critico:#C0392B;--critico-bg:#FDECEA;--alto:#E67E22;--alto-bg:#FEF5EC;--moderado:#2980B9;--moderado-bg:#EAF4FB;--ok:#27AE60;--surface:#F4F5F9;--white:#FFFFFF;--text:#1A1D3B;--muted:#6B7280;--border:#E2E4EF}
+  body{font-family:'Inter',sans-serif;background:var(--surface);color:var(--text);min-height:100vh}
+  header{background:var(--navy)}
+  .header-bar{background:var(--yellow);height:5px}
+  .header-inner{padding:20px 32px 18px;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  .header-title{color:#fff;font-size:22px;font-weight:700}.header-title span{color:var(--yellow)}
+  .header-sub{color:rgba(255,255,255,.55);font-size:12px;margin-top:2px}
+  .header-badge{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:20px;color:#fff;font-size:11px;font-weight:600;padding:4px 12px}
+  .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:24px 32px 0}
+  .kpi-card{background:var(--white);border-radius:10px;padding:16px 18px;border-top:3px solid var(--border);box-shadow:0 1px 3px rgba(0,0,0,.06)}
+  .kpi-card.c-total{border-top-color:var(--navy)}.kpi-card.c-jt{border-top-color:#F5C518}.kpi-card.c-jad{border-top-color:#1D9E75}.kpi-card.c-gmv{border-top-color:var(--ok)}
+  .kpi-label{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+  .kpi-value{font-size:28px;font-weight:900;line-height:1.1;margin-top:4px;color:var(--navy)}
+  .kpi-sub{font-size:11px;color:var(--muted);margin-top:3px}
+  main{padding:24px 32px 40px;display:flex;flex-direction:column;gap:20px}
+  .ranking-card{background:var(--white);border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,.07);overflow:hidden}
+  .ranking-title{padding:14px 20px;font-size:13px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)}
+  .rank-row{display:flex;align-items:center;gap:12px;padding:12px 20px;border-bottom:1px solid var(--border)}
+  .rank-row:last-child{border-bottom:none}
+  .rank-num{width:24px;height:24px;border-radius:50%;background:var(--surface);font-size:11px;font-weight:700;color:var(--muted);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .rank-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+  .rank-name{font-size:13px;font-weight:600;flex:1}
+  .rank-bar-wrap{width:200px;display:flex;align-items:center;gap:8px}
+  .rank-bar-outer{flex:1;height:6px;background:var(--border);border-radius:3px}
+  .rank-bar-inner{height:100%;border-radius:3px}
+  .rank-ids{font-size:12px;font-weight:700;color:var(--navy);min-width:60px;text-align:right}
+  .rank-gmv{font-size:12px;color:var(--muted);min-width:80px;text-align:right}
+  .carrier-tabs{display:flex;gap:8px;flex-wrap:wrap}
+  .carrier-tab{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;border:2px solid var(--border);border-radius:10px;padding:8px 16px;background:var(--white);color:var(--muted);cursor:pointer;transition:all .15s}
+  .carrier-tab:hover{border-color:var(--navy);color:var(--navy)}
+  .carrier-tab.active{color:#fff;border-color:transparent}
+  .tab-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+  .tab-ids{font-size:11px;font-weight:500;opacity:.8}
+  .carrier-panel{display:none}.carrier-panel.active{display:flex;flex-direction:column;gap:16px}
+  .panel-header{background:var(--white);border-radius:12px;padding:20px 24px;box-shadow:0 1px 4px rgba(0,0,0,.07);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+  .panel-carrier-name{font-size:20px;font-weight:900;display:flex;align-items:center;gap:10px}
+  .panel-dot{width:14px;height:14px;border-radius:50%}
+  .panel-kpis{display:flex;gap:24px;flex-wrap:wrap;align-items:center}
+  .panel-kpi{text-align:center}
+  .panel-kpi-val{font-size:22px;font-weight:900;color:var(--navy)}
+  .panel-kpi-lbl{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase}
+  .week-block{background:var(--white);border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,.07);overflow:hidden}
+  .week-header{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid var(--border);cursor:pointer;user-select:none}
+  .week-title{font-size:15px;font-weight:700;color:var(--navy);display:flex;align-items:center;gap:10px}
+  .week-pill{font-size:11px;font-weight:700;border-radius:20px;padding:3px 10px}
+  .pill-critico{background:var(--critico-bg);color:var(--critico)}
+  .pill-atencao{background:var(--alto-bg);color:var(--alto)}
+  .pill-moderado{background:var(--moderado-bg);color:var(--moderado)}
+  .week-kpis{display:flex;gap:20px;font-size:12px;color:var(--muted);align-items:center}
+  .week-kpis strong{color:var(--text);font-weight:700}
+  .chevron{transition:transform .2s;font-style:normal}
+  .collapsed .chevron{transform:rotate(-90deg)}
+  .week-body.hidden{display:none}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  thead tr{background:var(--surface)}
+  th{text-align:left;padding:10px 16px;font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)}
+  td{padding:11px 16px;border-bottom:1px solid var(--border);vertical-align:middle}
+  tr:last-child td{border-bottom:none}
+  tr:hover td{background:#FAFAFA}
+  .num-right{text-align:right;font-variant-numeric:tabular-nums}
+  .bar-wrap{display:flex;align-items:center;gap:8px}
+  .bar-outer{flex:1;height:6px;background:var(--border);border-radius:3px;min-width:60px}
+  .bar-inner{height:100%;border-radius:3px}
+  .uf-name{font-weight:600}
+  .btn-dl{font-size:11px;font-weight:700;background:var(--navy);color:#fff;border:none;border-radius:6px;padding:4px 10px;cursor:pointer;white-space:nowrap;flex-shrink:0}
+  .btn-dl:hover{background:#1a1f5c}
 </style>
 </head>
 <body>
@@ -82,193 +80,1012 @@
   <div class="header-bar"></div>
   <div class="header-inner">
     <div>
-      <div class="header-title">Farol BPP — <span>IMILE DELIVERY</span></div>
-      <div class="header-sub">Risco de pagamento BPP · Referência: 03/08/2026 · Base: SHP_DATE_PAY_BPP_BUYER</div>
+      <div class="header-title">Farol BPP — <span>Todos os Carriers</span></div>
+      <div class="header-sub">Risco de pagamento BPP · Referência: 03/08/2026 · Base: SHP_DATE_PAY_BPP_BUYER + UF</div>
     </div>
     <span class="header-badge">CCO Governança IC</span>
   </div>
 </header>
 
 <div class="kpi-row">
-  <div class="kpi-card c-critico">
-    <div class="kpi-label">🔴 IDs Críticos — BPP Pago ao Buyer</div>
-    <div class="kpi-value">187</div>
-    <div class="kpi-sub">Pagamento vencido · W31</div>
-  </div>
-  <div class="kpi-card c-moderado">
-    <div class="kpi-label">🔵 IDs Moderados — Em Aberto</div>
-    <div class="kpi-value">2.723</div>
-    <div class="kpi-sub">Pagamento futuro · W32–W34</div>
-  </div>
   <div class="kpi-card c-total">
-    <div class="kpi-label">Total IDs em risco</div>
-    <div class="kpi-value">2.910</div>
-    <div class="kpi-sub">IMILE · todas as UFs</div>
+    <div class="kpi-label">Total IDs em Risco</div>
+    <div class="kpi-value">355</div>
+    <div class="kpi-sub">Todos os carriers</div>
+  </div>
+  <div class="kpi-card c-jt">
+    <div class="kpi-label">🥇 Maior Volume — J&T</div>
+    <div class="kpi-value">109</div>
+    <div class="kpi-sub">IDs · $ 8.0k</div>
+  </div>
+  <div class="kpi-card c-jad">
+    <div class="kpi-label">🥈 JAD LOGISTICA</div>
+    <div class="kpi-value">170</div>
+    <div class="kpi-sub">IDs · $ 7.3k</div>
   </div>
   <div class="kpi-card c-gmv">
     <div class="kpi-label">GMV Total em Risco</div>
-    <div class="kpi-value">$ 129,1k</div>
-    <div class="kpi-sub">USD · $ 8,5k BPP pago ao buyer + $ 120,6k futuro</div>
+    <div class="kpi-value">$ 20.0k</div>
+    <div class="kpi-sub">USD · todos os carriers</div>
   </div>
 </div>
 
 <main>
-  <div class="alert-banner">
-    <span class="alert-icon">🚨</span>
-    <div class="alert-text">
-      <strong>187 IDs com BPP já pagos — recuperar pacote para devolver.</strong> Pagamento ao comprador venceu antes de 03/08. Concentração em <strong>W31 · Amazonas (51 IDs · USD 4.312)</strong> e <strong>W31 · Maranhão (52 IDs · USD 1.251)</strong>. W32, W33 e W34 ainda estão em aberto — janela de ação disponível.
+  <div class="ranking-card">
+    <div class="ranking-title">🏆 Ranking por GMV</div>
+    <div class="rank-row">
+      <div class="rank-num">1</div>
+      <div class="rank-dot" style="background:#F5C518"></div>
+      <div class="rank-name">J&T EXPRESS BRAZIL</div>
+      <div class="rank-bar-wrap"><div class="rank-bar-outer"><div class="rank-bar-inner" style="width:100%;background:#F5C518"></div></div></div>
+      <div class="rank-ids">109 IDs</div>
+      <div class="rank-gmv">$ 8.0k</div>
     </div>
+<div class="rank-row">
+      <div class="rank-num">2</div>
+      <div class="rank-dot" style="background:#1D9E75"></div>
+      <div class="rank-name">JAD LOGISTICA LTDA</div>
+      <div class="rank-bar-wrap"><div class="rank-bar-outer"><div class="rank-bar-inner" style="width:91%;background:#1D9E75"></div></div></div>
+      <div class="rank-ids">170 IDs</div>
+      <div class="rank-gmv">$ 7.3k</div>
+    </div>
+<div class="rank-row">
+      <div class="rank-num">3</div>
+      <div class="rank-dot" style="background:#7b6fd4"></div>
+      <div class="rank-name">IMILE DELIVERY</div>
+      <div class="rank-bar-wrap"><div class="rank-bar-outer"><div class="rank-bar-inner" style="width:41%;background:#7b6fd4"></div></div></div>
+      <div class="rank-ids">59 IDs</div>
+      <div class="rank-gmv">$ 3.3k</div>
+    </div>
+<div class="rank-row">
+      <div class="rank-num">4</div>
+      <div class="rank-dot" style="background:#E8821A"></div>
+      <div class="rank-name">LOGGI</div>
+      <div class="rank-bar-wrap"><div class="rank-bar-outer"><div class="rank-bar-inner" style="width:7%;background:#E8821A"></div></div></div>
+      <div class="rank-ids">8 IDs</div>
+      <div class="rank-gmv">$ 556</div>
+    </div>
+<div class="rank-row">
+      <div class="rank-num">5</div>
+      <div class="rank-dot" style="background:#D85A30"></div>
+      <div class="rank-name">DOMINALOG EXPRESS</div>
+      <div class="rank-bar-wrap"><div class="rank-bar-outer"><div class="rank-bar-inner" style="width:5%;background:#D85A30"></div></div></div>
+      <div class="rank-ids">4 IDs</div>
+      <div class="rank-gmv">$ 423</div>
+    </div>
+<div class="rank-row">
+      <div class="rank-num">6</div>
+      <div class="rank-dot" style="background:#888780"></div>
+      <div class="rank-name">CARVALIMA</div>
+      <div class="rank-bar-wrap"><div class="rank-bar-outer"><div class="rank-bar-inner" style="width:5%;background:#888780"></div></div></div>
+      <div class="rank-ids">5 IDs</div>
+      <div class="rank-gmv">$ 419</div>
+    </div>
+
   </div>
 
   <div>
-    <div class="section-title">Detalhamento por Semana de Pagamento &amp; UF</div>
-    <div class="controls">
-      <button class="ctrl-btn active" onclick="filterWeek('all',this)">Todas as semanas</button>
-      <button class="ctrl-btn" onclick="filterWeek('W31',this)">W31 🔴</button>
-      <button class="ctrl-btn" onclick="filterWeek('W32',this)">W32 🟠</button>
-      <button class="ctrl-btn" onclick="filterWeek('W33',this)">W33 🔵</button>
-      <button class="ctrl-btn" onclick="filterWeek('W34',this)">W34 🔵</button>
+    <div class="carrier-tabs">
+      <div class="carrier-tab active" style="background:#F5C518;border-color:#F5C518;color:#1A1D3B;" onclick="showCarrier('JeT_EXPRESS_BRAZIL',this)">
+      <div class="tab-dot" style="background:#fff"></div>
+      J&T EXPRESS
+      <span class="tab-ids">109 IDs</span>
+    </div>
+<div class="carrier-tab"  onclick="showCarrier('JAD_LOGISTICA_LTDA',this)">
+      <div class="tab-dot" style="background:#1D9E75"></div>
+      JAD LOGISTICA
+      <span class="tab-ids">170 IDs</span>
+    </div>
+<div class="carrier-tab"  onclick="showCarrier('IMILE_DELIVERY',this)">
+      <div class="tab-dot" style="background:#7b6fd4"></div>
+      IMILE DELIVERY
+      <span class="tab-ids">59 IDs</span>
+    </div>
+<div class="carrier-tab"  onclick="showCarrier('LOGGI',this)">
+      <div class="tab-dot" style="background:#E8821A"></div>
+      LOGGI
+      <span class="tab-ids">8 IDs</span>
+    </div>
+<div class="carrier-tab"  onclick="showCarrier('DOMINALOG_EXPRESS',this)">
+      <div class="tab-dot" style="background:#D85A30"></div>
+      DOMINALOG
+      <span class="tab-ids">4 IDs</span>
+    </div>
+<div class="carrier-tab"  onclick="showCarrier('CARVALIMA',this)">
+      <div class="tab-dot" style="background:#888780"></div>
+      CARVALIMA
+      <span class="tab-ids">5 IDs</span>
+    </div>
+
     </div>
   </div>
 
-  <!-- W31 -->
-  <div class="week-block" data-week="W31">
-    <div class="week-header" onclick="toggleWeek(this)">
-      <div class="week-title">
-        <span>Semana W31</span>
-        <span class="week-pill pill-critico">🔴 Pagamento ao Buyer</span>
-        <span style="font-size:12px;color:var(--muted);font-weight:400">28 jul – 3 ago · <strong style="color:var(--critico)">PRAZO EXPIRADO</strong></span>
+  <div class="carrier-panel active" id="panel-JeT_EXPRESS_BRAZIL">
+      <div class="panel-header">
+        <div class="panel-carrier-name"><div class="panel-dot" style="background:#F5C518"></div>J&T EXPRESS BRAZIL</div>
+        <div class="panel-kpis">
+          <div class="panel-kpi"><div class="panel-kpi-val">109</div><div class="panel-kpi-lbl">Total IDs</div></div>
+          <div class="panel-kpi"><div class="panel-kpi-val" style="color:var(--ok)">$ 8.0k</div><div class="panel-kpi-lbl">GMV Total</div></div>
+          <button class="btn-dl" style="font-size:12px;padding:6px 14px;" onclick="downloadCSV('JeT_EXPRESS_BRAZIL',null)">⬇ Baixar todos</button>
+        </div>
       </div>
-      <div class="week-kpis">
-        <span>IDs: <strong>184</strong></span>
-        <span>GMV: <strong>$ 8,5k</strong></span>
-        <button class="btn-download" onclick="event.stopPropagation();downloadCSV('W31')">⬇ CSV</button>
-        <i class="chevron">▾</i>
-      </div>
-    </div>
-    <div class="week-body hidden">
-      <table>
-        <thead><tr><th>UF</th><th class="num-right">IDs</th><th>GMV (USD)</th></tr></thead>
-        <tbody>
-          <tr><td class="uf-name">Amazonas</td><td class="num-right">51</td><td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-critico" style="width:100%"></div></div>$ 4.312</div></td></tr>
-          <tr><td class="uf-name">Maranhão</td><td class="num-right">52</td><td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-critico" style="width:29%"></div></div>$ 1.251</div></td></tr>
-          <tr><td class="uf-name">Pará</td><td class="num-right">46</td><td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-critico" style="width:48%"></div></div>$ 2.059</div></td></tr>
-          <tr><td class="uf-name">Roraima</td><td class="num-right">19</td><td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-critico" style="width:15%"></div></div>$ 657</div></td></tr>
-          <tr><td class="uf-name">Piauí</td><td class="num-right">13</td><td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-critico" style="width:4%"></div></div>$ 169</div></td></tr>
-          <tr><td class="uf-name">Rondônia</td><td class="num-right">3</td><td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-critico" style="width:1%"></div></div>$ 43</div></td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+      <div class="week-block">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <div class="week-title"><span>W29</span><span class="week-pill pill-critico">🔴 Vencido</span><span style="font-size:12px;color:var(--muted)">14–20 jul</span></div>
+            <div class="week-kpis">
+              <span>IDs: <strong>15</strong></span>
+              <span>GMV: <strong>$ 217</strong></span>
+              <button class="btn-dl" onclick="event.stopPropagation();downloadCSV('JeT_EXPRESS_BRAZIL','W29')">⬇ CSV</button>
+              <i class="chevron">▾</i>
+            </div>
+          </div>
+          <div class="week-body hidden">
+            <table><thead><tr><th>UF</th><th class="num-right">IDs</th><th>GMV (USD)</th><th class="num-right">%</th></tr></thead>
+            <tbody><tr>
+              <td class="uf-name">Rio Grande do Sul</td>
+              <td class="num-right">6</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:43%;background:#C0392B"></div></div>$ 94</div></td>
+              <td class="num-right">43.1%</td>
+            </tr><tr>
+              <td class="uf-name">Paraná</td>
+              <td class="num-right">7</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:32%;background:#C0392B"></div></div>$ 69</div></td>
+              <td class="num-right">31.8%</td>
+            </tr><tr>
+              <td class="uf-name">São Paulo</td>
+              <td class="num-right">1</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:21%;background:#C0392B"></div></div>$ 45</div></td>
+              <td class="num-right">20.6%</td>
+            </tr><tr>
+              <td class="uf-name">Minas Gerais</td>
+              <td class="num-right">1</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:5%;background:#C0392B"></div></div>$ 10</div></td>
+              <td class="num-right">4.6%</td>
+            </tr></tbody></table>
+          </div>
+        </div>
+<div class="week-block">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <div class="week-title"><span>W30</span><span class="week-pill pill-critico">🔴 Vencido</span><span style="font-size:12px;color:var(--muted)">21–27 jul</span></div>
+            <div class="week-kpis">
+              <span>IDs: <strong>22</strong></span>
+              <span>GMV: <strong>$ 3.1k</strong></span>
+              <button class="btn-dl" onclick="event.stopPropagation();downloadCSV('JeT_EXPRESS_BRAZIL','W30')">⬇ CSV</button>
+              <i class="chevron">▾</i>
+            </div>
+          </div>
+          <div class="week-body hidden">
+            <table><thead><tr><th>UF</th><th class="num-right">IDs</th><th>GMV (USD)</th><th class="num-right">%</th></tr></thead>
+            <tbody><tr>
+              <td class="uf-name">Rio Grande do Sul</td>
+              <td class="num-right">5</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:28%;background:#C0392B"></div></div>$ 862</div></td>
+              <td class="num-right">27.7%</td>
+            </tr><tr>
+              <td class="uf-name">Rondônia</td>
+              <td class="num-right">1</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:27%;background:#C0392B"></div></div>$ 843</div></td>
+              <td class="num-right">27.1%</td>
+            </tr><tr>
+              <td class="uf-name">Pará</td>
+              <td class="num-right">1</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:23%;background:#C0392B"></div></div>$ 728</div></td>
+              <td class="num-right">23.4%</td>
+            </tr><tr>
+              <td class="uf-name">Bahia</td>
+              <td class="num-right">3</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:13%;background:#C0392B"></div></div>$ 411</div></td>
+              <td class="num-right">13.2%</td>
+            </tr><tr>
+              <td class="uf-name">São Paulo</td>
+              <td class="num-right">4</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:3%;background:#C0392B"></div></div>$ 95</div></td>
+              <td class="num-right">3.1%</td>
+            </tr><tr>
+              <td class="uf-name">Paraná</td>
+              <td class="num-right">2</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:1%;background:#C0392B"></div></div>$ 46</div></td>
+              <td class="num-right">1.5%</td>
+            </tr><tr>
+              <td class="uf-name">Minas Gerais</td>
+              <td class="num-right">2</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:1%;background:#C0392B"></div></div>$ 40</div></td>
+              <td class="num-right">1.3%</td>
+            </tr><tr>
+              <td class="uf-name">Paraíba</td>
+              <td class="num-right">1</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:1%;background:#C0392B"></div></div>$ 35</div></td>
+              <td class="num-right">1.1%</td>
+            </tr><tr>
+              <td class="uf-name">Piauí</td>
+              <td class="num-right">2</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:1%;background:#C0392B"></div></div>$ 27</div></td>
+              <td class="num-right">0.9%</td>
+            </tr><tr>
+              <td class="uf-name">Pernambuco</td>
+              <td class="num-right">1</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:1%;background:#C0392B"></div></div>$ 21</div></td>
+              <td class="num-right">0.7%</td>
+            </tr></tbody></table>
+          </div>
+        </div>
+<div class="week-block">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <div class="week-title"><span>W31</span><span class="week-pill pill-critico">🔴 Vencido</span><span style="font-size:12px;color:var(--muted)">28 jul–3 ago</span></div>
+            <div class="week-kpis">
+              <span>IDs: <strong>56</strong></span>
+              <span>GMV: <strong>$ 4.4k</strong></span>
+              <button class="btn-dl" onclick="event.stopPropagation();downloadCSV('JeT_EXPRESS_BRAZIL','W31')">⬇ CSV</button>
+              <i class="chevron">▾</i>
+            </div>
+          </div>
+          <div class="week-body hidden">
+            <table><thead><tr><th>UF</th><th class="num-right">IDs</th><th>GMV (USD)</th><th class="num-right">%</th></tr></thead>
+            <tbody><tr>
+              <td class="uf-name">Pará</td>
+              <td class="num-right">2</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:22%;background:#C0392B"></div></div>$ 958</div></td>
+              <td class="num-right">21.7%</td>
+            </tr><tr>
+              <td class="uf-name">São Paulo</td>
+              <td class="num-right">14</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:19%;background:#C0392B"></div></div>$ 854</div></td>
+              <td class="num-right">19.3%</td>
+            </tr><tr>
+              <td class="uf-name">Rio Grande do Sul</td>
+              <td class="num-right">8</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:13%;background:#C0392B"></div></div>$ 594</div></td>
+              <td class="num-right">13.5%</td>
+            </tr><tr>
+              <td class="uf-name">Rio de Janeiro</td>
+              <td class="num-right">2</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:13%;background:#C0392B"></div></div>$ 569</div></td>
+              <td class="num-right">12.9%</td>
+            </tr><tr>
+              <td class="uf-name">Rondônia</td>
+              <td class="num-right">2</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:9%;background:#C0392B"></div></div>$ 389</div></td>
+              <td class="num-right">8.8%</td>
+            </tr><tr>
+              <td class="uf-name">Bahia</td>
+              <td class="num-right">1</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:9%;background:#C0392B"></div></div>$ 387</div></td>
+              <td class="num-right">8.8%</td>
+            </tr><tr>
+              <td class="uf-name">Maranhão</td>
+              <td class="num-right">2</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:4%;background:#C0392B"></div></div>$ 198</div></td>
+              <td class="num-right">4.5%</td>
+            </tr><tr>
+              <td class="uf-name">Paraná</td>
+              <td class="num-right">10</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:2%;background:#C0392B"></div></div>$ 102</div></td>
+              <td class="num-right">2.3%</td>
+            </tr><tr>
+              <td class="uf-name">Amapá</td>
+              <td class="num-right">1</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:2%;background:#C0392B"></div></div>$ 97</div></td>
+              <td class="num-right">2.2%</td>
+            </tr><tr>
+              <td class="uf-name">Minas Gerais</td>
+              <td class="num-right">3</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:2%;background:#C0392B"></div></div>$ 82</div></td>
+              <td class="num-right">1.9%</td>
+            </tr><tr>
+              <td class="uf-name">Ceará</td>
+              <td class="num-right">3</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:1%;background:#C0392B"></div></div>$ 54</div></td>
+              <td class="num-right">1.2%</td>
+            </tr><tr>
+              <td class="uf-name">Amazonas</td>
+              <td class="num-right">1</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:1%;background:#C0392B"></div></div>$ 40</div></td>
+              <td class="num-right">0.9%</td>
+            </tr><tr>
+              <td class="uf-name">Piauí</td>
+              <td class="num-right">1</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:1%;background:#C0392B"></div></div>$ 25</div></td>
+              <td class="num-right">0.6%</td>
+            </tr><tr>
+              <td class="uf-name">Distrito Federal</td>
+              <td class="num-right">2</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:1%;background:#C0392B"></div></div>$ 25</div></td>
+              <td class="num-right">0.6%</td>
+            </tr><tr>
+              <td class="uf-name">Goiás</td>
+              <td class="num-right">2</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:1%;background:#C0392B"></div></div>$ 23</div></td>
+              <td class="num-right">0.5%</td>
+            </tr><tr>
+              <td class="uf-name">Tocantins</td>
+              <td class="num-right">1</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:0%;background:#C0392B"></div></div>$ 12</div></td>
+              <td class="num-right">0.3%</td>
+            </tr><tr>
+              <td class="uf-name">Paraíba</td>
+              <td class="num-right">1</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:0%;background:#C0392B"></div></div>$ 8</div></td>
+              <td class="num-right">0.2%</td>
+            </tr></tbody></table>
+          </div>
+        </div>
+<div class="week-block">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <div class="week-title"><span>W32</span><span class="week-pill pill-atencao">🟠 Atenção</span><span style="font-size:12px;color:var(--muted)">4–10 ago</span></div>
+            <div class="week-kpis">
+              <span>IDs: <strong>16</strong></span>
+              <span>GMV: <strong>$ 258</strong></span>
+              <button class="btn-dl" onclick="event.stopPropagation();downloadCSV('JeT_EXPRESS_BRAZIL','W32')">⬇ CSV</button>
+              <i class="chevron">▾</i>
+            </div>
+          </div>
+          <div class="week-body hidden">
+            <table><thead><tr><th>UF</th><th class="num-right">IDs</th><th>GMV (USD)</th><th class="num-right">%</th></tr></thead>
+            <tbody><tr>
+              <td class="uf-name">São Paulo</td>
+              <td class="num-right">3</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:30%;background:#E67E22"></div></div>$ 78</div></td>
+              <td class="num-right">30.3%</td>
+            </tr><tr>
+              <td class="uf-name">Minas Gerais</td>
+              <td class="num-right">4</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:21%;background:#E67E22"></div></div>$ 55</div></td>
+              <td class="num-right">21.4%</td>
+            </tr><tr>
+              <td class="uf-name">Pernambuco</td>
+              <td class="num-right">2</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:19%;background:#E67E22"></div></div>$ 49</div></td>
+              <td class="num-right">19.1%</td>
+            </tr><tr>
+              <td class="uf-name">Ceará</td>
+              <td class="num-right">2</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:13%;background:#E67E22"></div></div>$ 32</div></td>
+              <td class="num-right">12.6%</td>
+            </tr><tr>
+              <td class="uf-name">Paraná</td>
+              <td class="num-right">2</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:6%;background:#E67E22"></div></div>$ 16</div></td>
+              <td class="num-right">6.4%</td>
+            </tr><tr>
+              <td class="uf-name">Rondônia</td>
+              <td class="num-right">1</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:6%;background:#E67E22"></div></div>$ 16</div></td>
+              <td class="num-right">6.1%</td>
+            </tr><tr>
+              <td class="uf-name">Rio de Janeiro</td>
+              <td class="num-right">1</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:2%;background:#E67E22"></div></div>$ 6</div></td>
+              <td class="num-right">2.3%</td>
+            </tr><tr>
+              <td class="uf-name">Tocantins</td>
+              <td class="num-right">1</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:2%;background:#E67E22"></div></div>$ 5</div></td>
+              <td class="num-right">1.8%</td>
+            </tr></tbody></table>
+          </div>
+        </div>
 
-  <!-- W32 -->
-  <div class="week-block" data-week="W32">
-    <div class="week-header" onclick="toggleWeek(this)">
-      <div class="week-title">
-        <span>Semana W32</span>
-        <span class="week-pill pill-atencao">🟠 Atenção</span>
-        <span style="font-size:12px;color:var(--muted);font-weight:400">4–10 ago · Próximos dias</span>
-      </div>
-      <div class="week-kpis">
-        <span>IDs: <strong>495</strong></span>
-        <span>GMV: <strong>$ 23,8k</strong></span>
-        <button class="btn-download" onclick="event.stopPropagation();downloadCSV('W32')">⬇ CSV</button>
-        <i class="chevron">▾</i>
-      </div>
     </div>
-    <div class="week-body hidden">
-      <table>
-        <thead><tr><th>UF</th><th class="num-right">IDs</th><th>GMV (USD)</th></tr></thead>
-        <tbody>
-          <tr><td class="uf-name">Pará</td><td class="num-right">163</td><td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:100%"></div></div>$ 11.258</div></td></tr>
-          <tr><td class="uf-name">Amazonas</td><td class="num-right">86</td><td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:52%"></div></div>$ 5.868</div></td></tr>
-          <tr><td class="uf-name">Maranhão</td><td class="num-right">148</td><td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:33%"></div></div>$ 3.733</div></td></tr>
-          <tr><td class="uf-name">Roraima</td><td class="num-right">39</td><td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:12%"></div></div>$ 1.346</div></td></tr>
-          <tr><td class="uf-name">Rondônia</td><td class="num-right">43</td><td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:10%"></div></div>$ 1.078</div></td></tr>
-          <tr><td class="uf-name">Piauí</td><td class="num-right">16</td><td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:4%"></div></div>$ 473</div></td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+<div class="carrier-panel" id="panel-JAD_LOGISTICA_LTDA">
+      <div class="panel-header">
+        <div class="panel-carrier-name"><div class="panel-dot" style="background:#1D9E75"></div>JAD LOGISTICA LTDA</div>
+        <div class="panel-kpis">
+          <div class="panel-kpi"><div class="panel-kpi-val">170</div><div class="panel-kpi-lbl">Total IDs</div></div>
+          <div class="panel-kpi"><div class="panel-kpi-val" style="color:var(--ok)">$ 7.3k</div><div class="panel-kpi-lbl">GMV Total</div></div>
+          <button class="btn-dl" style="font-size:12px;padding:6px 14px;" onclick="downloadCSV('JAD_LOGISTICA_LTDA',null)">⬇ Baixar todos</button>
+        </div>
+      </div>
+      <div class="week-block">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <div class="week-title"><span>W25</span><span class="week-pill pill-critico">🔴 Vencido</span><span style="font-size:12px;color:var(--muted)">16–22 jun</span></div>
+            <div class="week-kpis">
+              <span>IDs: <strong>141</strong></span>
+              <span>GMV: <strong>$ 4.2k</strong></span>
+              <button class="btn-dl" onclick="event.stopPropagation();downloadCSV('JAD_LOGISTICA_LTDA','W25')">⬇ CSV</button>
+              <i class="chevron">▾</i>
+            </div>
+          </div>
+          <div class="week-body hidden">
+            <table><thead><tr><th>UF</th><th class="num-right">IDs</th><th>GMV (USD)</th><th class="num-right">%</th></tr></thead>
+            <tbody><tr>
+              <td class="uf-name">Paraná</td>
+              <td class="num-right">138</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:88%;background:#C0392B"></div></div>$ 3.7k</div></td>
+              <td class="num-right">88.0%</td>
+            </tr><tr>
+              <td class="uf-name">Amazonas</td>
+              <td class="num-right">1</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:9%;background:#C0392B"></div></div>$ 375</div></td>
+              <td class="num-right">9.0%</td>
+            </tr><tr>
+              <td class="uf-name">Rio Grande do Sul</td>
+              <td class="num-right">2</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:3%;background:#C0392B"></div></div>$ 126</div></td>
+              <td class="num-right">3.0%</td>
+            </tr></tbody></table>
+          </div>
+        </div>
+<div class="week-block">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <div class="week-title"><span>W26</span><span class="week-pill pill-critico">🔴 Vencido</span><span style="font-size:12px;color:var(--muted)">23–29 jun</span></div>
+            <div class="week-kpis">
+              <span>IDs: <strong>14</strong></span>
+              <span>GMV: <strong>$ 1.4k</strong></span>
+              <button class="btn-dl" onclick="event.stopPropagation();downloadCSV('JAD_LOGISTICA_LTDA','W26')">⬇ CSV</button>
+              <i class="chevron">▾</i>
+            </div>
+          </div>
+          <div class="week-body hidden">
+            <table><thead><tr><th>UF</th><th class="num-right">IDs</th><th>GMV (USD)</th><th class="num-right">%</th></tr></thead>
+            <tbody><tr>
+              <td class="uf-name">Paraná</td>
+              <td class="num-right">6</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:57%;background:#C0392B"></div></div>$ 815</div></td>
+              <td class="num-right">57.4%</td>
+            </tr><tr>
+              <td class="uf-name">Minas Gerais</td>
+              <td class="num-right">4</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:28%;background:#C0392B"></div></div>$ 403</div></td>
+              <td class="num-right">28.3%</td>
+            </tr><tr>
+              <td class="uf-name">Mato Grosso do Sul</td>
+              <td class="num-right">2</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:8%;background:#C0392B"></div></div>$ 114</div></td>
+              <td class="num-right">8.0%</td>
+            </tr><tr>
+              <td class="uf-name">Maranhão</td>
+              <td class="num-right">1</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:4%;background:#C0392B"></div></div>$ 51</div></td>
+              <td class="num-right">3.6%</td>
+            </tr><tr>
+              <td class="uf-name">Rio Grande do Sul</td>
+              <td class="num-right">1</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:3%;background:#C0392B"></div></div>$ 38</div></td>
+              <td class="num-right">2.7%</td>
+            </tr></tbody></table>
+          </div>
+        </div>
+<div class="week-block">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <div class="week-title"><span>W27</span><span class="week-pill pill-critico">🔴 Vencido</span><span style="font-size:12px;color:var(--muted)">30 jun–6 jul</span></div>
+            <div class="week-kpis">
+              <span>IDs: <strong>2</strong></span>
+              <span>GMV: <strong>$ 234</strong></span>
+              <button class="btn-dl" onclick="event.stopPropagation();downloadCSV('JAD_LOGISTICA_LTDA','W27')">⬇ CSV</button>
+              <i class="chevron">▾</i>
+            </div>
+          </div>
+          <div class="week-body hidden">
+            <table><thead><tr><th>UF</th><th class="num-right">IDs</th><th>GMV (USD)</th><th class="num-right">%</th></tr></thead>
+            <tbody><tr>
+              <td class="uf-name">Mato Grosso do Sul</td>
+              <td class="num-right">2</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:100%;background:#C0392B"></div></div>$ 234</div></td>
+              <td class="num-right">100.0%</td>
+            </tr></tbody></table>
+          </div>
+        </div>
+<div class="week-block">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <div class="week-title"><span>W29</span><span class="week-pill pill-critico">🔴 Vencido</span><span style="font-size:12px;color:var(--muted)">14–20 jul</span></div>
+            <div class="week-kpis">
+              <span>IDs: <strong>2</strong></span>
+              <span>GMV: <strong>$ 189</strong></span>
+              <button class="btn-dl" onclick="event.stopPropagation();downloadCSV('JAD_LOGISTICA_LTDA','W29')">⬇ CSV</button>
+              <i class="chevron">▾</i>
+            </div>
+          </div>
+          <div class="week-body hidden">
+            <table><thead><tr><th>UF</th><th class="num-right">IDs</th><th>GMV (USD)</th><th class="num-right">%</th></tr></thead>
+            <tbody><tr>
+              <td class="uf-name">Paraíba</td>
+              <td class="num-right">1</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:90%;background:#C0392B"></div></div>$ 170</div></td>
+              <td class="num-right">89.9%</td>
+            </tr><tr>
+              <td class="uf-name">Rio de Janeiro</td>
+              <td class="num-right">1</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:10%;background:#C0392B"></div></div>$ 19</div></td>
+              <td class="num-right">10.1%</td>
+            </tr></tbody></table>
+          </div>
+        </div>
+<div class="week-block">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <div class="week-title"><span>W31</span><span class="week-pill pill-critico">🔴 Vencido</span><span style="font-size:12px;color:var(--muted)">28 jul–3 ago</span></div>
+            <div class="week-kpis">
+              <span>IDs: <strong>10</strong></span>
+              <span>GMV: <strong>$ 1.2k</strong></span>
+              <button class="btn-dl" onclick="event.stopPropagation();downloadCSV('JAD_LOGISTICA_LTDA','W31')">⬇ CSV</button>
+              <i class="chevron">▾</i>
+            </div>
+          </div>
+          <div class="week-body hidden">
+            <table><thead><tr><th>UF</th><th class="num-right">IDs</th><th>GMV (USD)</th><th class="num-right">%</th></tr></thead>
+            <tbody><tr>
+              <td class="uf-name">Tocantins</td>
+              <td class="num-right">1</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:45%;background:#C0392B"></div></div>$ 537</div></td>
+              <td class="num-right">44.7%</td>
+            </tr><tr>
+              <td class="uf-name">Maranhão</td>
+              <td class="num-right">2</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:36%;background:#C0392B"></div></div>$ 431</div></td>
+              <td class="num-right">35.9%</td>
+            </tr><tr>
+              <td class="uf-name">Minas Gerais</td>
+              <td class="num-right">2</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:9%;background:#C0392B"></div></div>$ 114</div></td>
+              <td class="num-right">9.5%</td>
+            </tr><tr>
+              <td class="uf-name">São Paulo</td>
+              <td class="num-right">1</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:6%;background:#C0392B"></div></div>$ 72</div></td>
+              <td class="num-right">6.0%</td>
+            </tr><tr>
+              <td class="uf-name">Rio Grande do Sul</td>
+              <td class="num-right">3</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:3%;background:#C0392B"></div></div>$ 37</div></td>
+              <td class="num-right">3.1%</td>
+            </tr><tr>
+              <td class="uf-name">Bahia</td>
+              <td class="num-right">1</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:1%;background:#C0392B"></div></div>$ 10</div></td>
+              <td class="num-right">0.9%</td>
+            </tr></tbody></table>
+          </div>
+        </div>
+<div class="week-block">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <div class="week-title"><span>W32</span><span class="week-pill pill-atencao">🟠 Atenção</span><span style="font-size:12px;color:var(--muted)">4–10 ago</span></div>
+            <div class="week-kpis">
+              <span>IDs: <strong>1</strong></span>
+              <span>GMV: <strong>$ 85</strong></span>
+              <button class="btn-dl" onclick="event.stopPropagation();downloadCSV('JAD_LOGISTICA_LTDA','W32')">⬇ CSV</button>
+              <i class="chevron">▾</i>
+            </div>
+          </div>
+          <div class="week-body hidden">
+            <table><thead><tr><th>UF</th><th class="num-right">IDs</th><th>GMV (USD)</th><th class="num-right">%</th></tr></thead>
+            <tbody><tr>
+              <td class="uf-name">Mato Grosso do Sul</td>
+              <td class="num-right">1</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:100%;background:#E67E22"></div></div>$ 85</div></td>
+              <td class="num-right">100.0%</td>
+            </tr></tbody></table>
+          </div>
+        </div>
 
-  <!-- W33 -->
-  <div class="week-block" data-week="W33">
-    <div class="week-header" onclick="toggleWeek(this)">
-      <div class="week-title">
-        <span>Semana W33</span>
-        <span class="week-pill pill-moderado">🔵 Moderado</span>
-        <span style="font-size:12px;color:var(--muted);font-weight:400">11–17 ago · Esta semana</span>
-      </div>
-      <div class="week-kpis">
-        <span>IDs: <strong>1.146</strong></span>
-        <span>GMV: <strong>$ 43,3k</strong></span>
-        <button class="btn-download" onclick="event.stopPropagation();downloadCSV('W33')">⬇ CSV</button>
-        <i class="chevron">▾</i>
-      </div>
     </div>
-    <div class="week-body hidden">
-      <table>
-        <thead><tr><th>UF</th><th class="num-right">IDs</th><th>GMV (USD)</th></tr></thead>
-        <tbody>
-          <tr><td class="uf-name">Amazonas</td><td class="num-right">323</td><td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:100%"></div></div>$ 17.278</div></td></tr>
-          <tr><td class="uf-name">Pará</td><td class="num-right">273</td><td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:73%"></div></div>$ 12.679</div></td></tr>
-          <tr><td class="uf-name">Maranhão</td><td class="num-right">375</td><td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:51%"></div></div>$ 8.799</div></td></tr>
-          <tr><td class="uf-name">Roraima</td><td class="num-right">60</td><td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:11%"></div></div>$ 1.946</div></td></tr>
-          <tr><td class="uf-name">Rondônia</td><td class="num-right">69</td><td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:9%"></div></div>$ 1.639</div></td></tr>
-          <tr><td class="uf-name">Piauí</td><td class="num-right">46</td><td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:6%"></div></div>$ 979</div></td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+<div class="carrier-panel" id="panel-IMILE_DELIVERY">
+      <div class="panel-header">
+        <div class="panel-carrier-name"><div class="panel-dot" style="background:#7b6fd4"></div>IMILE DELIVERY</div>
+        <div class="panel-kpis">
+          <div class="panel-kpi"><div class="panel-kpi-val">59</div><div class="panel-kpi-lbl">Total IDs</div></div>
+          <div class="panel-kpi"><div class="panel-kpi-val" style="color:var(--ok)">$ 3.3k</div><div class="panel-kpi-lbl">GMV Total</div></div>
+          <button class="btn-dl" style="font-size:12px;padding:6px 14px;" onclick="downloadCSV('IMILE_DELIVERY',null)">⬇ Baixar todos</button>
+        </div>
+      </div>
+      <div class="week-block">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <div class="week-title"><span>W28</span><span class="week-pill pill-critico">🔴 Vencido</span><span style="font-size:12px;color:var(--muted)">7–13 jul</span></div>
+            <div class="week-kpis">
+              <span>IDs: <strong>1</strong></span>
+              <span>GMV: <strong>$ 31</strong></span>
+              <button class="btn-dl" onclick="event.stopPropagation();downloadCSV('IMILE_DELIVERY','W28')">⬇ CSV</button>
+              <i class="chevron">▾</i>
+            </div>
+          </div>
+          <div class="week-body hidden">
+            <table><thead><tr><th>UF</th><th class="num-right">IDs</th><th>GMV (USD)</th><th class="num-right">%</th></tr></thead>
+            <tbody><tr>
+              <td class="uf-name">Amazonas</td>
+              <td class="num-right">1</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:100%;background:#C0392B"></div></div>$ 31</div></td>
+              <td class="num-right">100.0%</td>
+            </tr></tbody></table>
+          </div>
+        </div>
+<div class="week-block">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <div class="week-title"><span>W29</span><span class="week-pill pill-critico">🔴 Vencido</span><span style="font-size:12px;color:var(--muted)">14–20 jul</span></div>
+            <div class="week-kpis">
+              <span>IDs: <strong>1</strong></span>
+              <span>GMV: <strong>$ 12</strong></span>
+              <button class="btn-dl" onclick="event.stopPropagation();downloadCSV('IMILE_DELIVERY','W29')">⬇ CSV</button>
+              <i class="chevron">▾</i>
+            </div>
+          </div>
+          <div class="week-body hidden">
+            <table><thead><tr><th>UF</th><th class="num-right">IDs</th><th>GMV (USD)</th><th class="num-right">%</th></tr></thead>
+            <tbody><tr>
+              <td class="uf-name">Maranhão</td>
+              <td class="num-right">1</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:100%;background:#C0392B"></div></div>$ 12</div></td>
+              <td class="num-right">100.0%</td>
+            </tr></tbody></table>
+          </div>
+        </div>
+<div class="week-block">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <div class="week-title"><span>W30</span><span class="week-pill pill-critico">🔴 Vencido</span><span style="font-size:12px;color:var(--muted)">21–27 jul</span></div>
+            <div class="week-kpis">
+              <span>IDs: <strong>1</strong></span>
+              <span>GMV: <strong>$ 14</strong></span>
+              <button class="btn-dl" onclick="event.stopPropagation();downloadCSV('IMILE_DELIVERY','W30')">⬇ CSV</button>
+              <i class="chevron">▾</i>
+            </div>
+          </div>
+          <div class="week-body hidden">
+            <table><thead><tr><th>UF</th><th class="num-right">IDs</th><th>GMV (USD)</th><th class="num-right">%</th></tr></thead>
+            <tbody><tr>
+              <td class="uf-name">Maranhão</td>
+              <td class="num-right">1</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:100%;background:#C0392B"></div></div>$ 14</div></td>
+              <td class="num-right">100.0%</td>
+            </tr></tbody></table>
+          </div>
+        </div>
+<div class="week-block">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <div class="week-title"><span>W31</span><span class="week-pill pill-critico">🔴 Vencido</span><span style="font-size:12px;color:var(--muted)">28 jul–3 ago</span></div>
+            <div class="week-kpis">
+              <span>IDs: <strong>42</strong></span>
+              <span>GMV: <strong>$ 2.8k</strong></span>
+              <button class="btn-dl" onclick="event.stopPropagation();downloadCSV('IMILE_DELIVERY','W31')">⬇ CSV</button>
+              <i class="chevron">▾</i>
+            </div>
+          </div>
+          <div class="week-body hidden">
+            <table><thead><tr><th>UF</th><th class="num-right">IDs</th><th>GMV (USD)</th><th class="num-right">%</th></tr></thead>
+            <tbody><tr>
+              <td class="uf-name">Amazonas</td>
+              <td class="num-right">15</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:68%;background:#C0392B"></div></div>$ 1.9k</div></td>
+              <td class="num-right">67.8%</td>
+            </tr><tr>
+              <td class="uf-name">Pará</td>
+              <td class="num-right">10</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:18%;background:#C0392B"></div></div>$ 490</div></td>
+              <td class="num-right">17.7%</td>
+            </tr><tr>
+              <td class="uf-name">Roraima</td>
+              <td class="num-right">4</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:7%;background:#C0392B"></div></div>$ 197</div></td>
+              <td class="num-right">7.1%</td>
+            </tr><tr>
+              <td class="uf-name">Maranhão</td>
+              <td class="num-right">9</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:6%;background:#C0392B"></div></div>$ 163</div></td>
+              <td class="num-right">5.9%</td>
+            </tr><tr>
+              <td class="uf-name">Piauí</td>
+              <td class="num-right">4</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:2%;background:#C0392B"></div></div>$ 42</div></td>
+              <td class="num-right">1.5%</td>
+            </tr></tbody></table>
+          </div>
+        </div>
+<div class="week-block">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <div class="week-title"><span>W32</span><span class="week-pill pill-atencao">🟠 Atenção</span><span style="font-size:12px;color:var(--muted)">4–10 ago</span></div>
+            <div class="week-kpis">
+              <span>IDs: <strong>14</strong></span>
+              <span>GMV: <strong>$ 485</strong></span>
+              <button class="btn-dl" onclick="event.stopPropagation();downloadCSV('IMILE_DELIVERY','W32')">⬇ CSV</button>
+              <i class="chevron">▾</i>
+            </div>
+          </div>
+          <div class="week-body hidden">
+            <table><thead><tr><th>UF</th><th class="num-right">IDs</th><th>GMV (USD)</th><th class="num-right">%</th></tr></thead>
+            <tbody><tr>
+              <td class="uf-name">Pará</td>
+              <td class="num-right">5</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:56%;background:#E67E22"></div></div>$ 272</div></td>
+              <td class="num-right">56.0%</td>
+            </tr><tr>
+              <td class="uf-name">Amazonas</td>
+              <td class="num-right">2</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:16%;background:#E67E22"></div></div>$ 76</div></td>
+              <td class="num-right">15.7%</td>
+            </tr><tr>
+              <td class="uf-name">Roraima</td>
+              <td class="num-right">1</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:14%;background:#E67E22"></div></div>$ 69</div></td>
+              <td class="num-right">14.2%</td>
+            </tr><tr>
+              <td class="uf-name">Maranhão</td>
+              <td class="num-right">5</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:11%;background:#E67E22"></div></div>$ 53</div></td>
+              <td class="num-right">10.9%</td>
+            </tr><tr>
+              <td class="uf-name">Rondônia</td>
+              <td class="num-right">1</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:3%;background:#E67E22"></div></div>$ 15</div></td>
+              <td class="num-right">3.2%</td>
+            </tr></tbody></table>
+          </div>
+        </div>
 
-  <!-- W34 -->
-  <div class="week-block" data-week="W34">
-    <div class="week-header" onclick="toggleWeek(this)">
-      <div class="week-title">
-        <span>Semana W34</span>
-        <span class="week-pill pill-moderado">🔵 Moderado</span>
-        <span style="font-size:12px;color:var(--muted);font-weight:400">18–24 ago · Próxima semana</span>
-      </div>
-      <div class="week-kpis">
-        <span>IDs: <strong>1.082</strong></span>
-        <span>GMV: <strong>$ 53,5k</strong></span>
-        <button class="btn-download" onclick="event.stopPropagation();downloadCSV('W34')">⬇ CSV</button>
-        <i class="chevron">▾</i>
-      </div>
     </div>
-    <div class="week-body hidden">
-      <table>
-        <thead><tr><th>UF</th><th class="num-right">IDs</th><th>GMV (USD)</th></tr></thead>
-        <tbody>
-          <tr><td class="uf-name">Amazonas</td><td class="num-right">403</td><td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:100%"></div></div>$ 27.269</div></td></tr>
-          <tr><td class="uf-name">Pará</td><td class="num-right">191</td><td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:43%"></div></div>$ 11.741</div></td></tr>
-          <tr><td class="uf-name">Maranhão</td><td class="num-right">281</td><td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:29%"></div></div>$ 7.826</div></td></tr>
-          <tr><td class="uf-name">Roraima</td><td class="num-right">82</td><td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:14%"></div></div>$ 3.738</div></td></tr>
-          <tr><td class="uf-name">Rondônia</td><td class="num-right">85</td><td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:8%"></div></div>$ 2.262</div></td></tr>
-          <tr><td class="uf-name">Piauí</td><td class="num-right">40</td><td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner bar-moderado" style="width:2%"></div></div>$ 671</div></td></tr>
-        </tbody>
-      </table>
+<div class="carrier-panel" id="panel-LOGGI">
+      <div class="panel-header">
+        <div class="panel-carrier-name"><div class="panel-dot" style="background:#E8821A"></div>LOGGI</div>
+        <div class="panel-kpis">
+          <div class="panel-kpi"><div class="panel-kpi-val">8</div><div class="panel-kpi-lbl">Total IDs</div></div>
+          <div class="panel-kpi"><div class="panel-kpi-val" style="color:var(--ok)">$ 556</div><div class="panel-kpi-lbl">GMV Total</div></div>
+          <button class="btn-dl" style="font-size:12px;padding:6px 14px;" onclick="downloadCSV('LOGGI',null)">⬇ Baixar todos</button>
+        </div>
+      </div>
+      <div class="week-block">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <div class="week-title"><span>W30</span><span class="week-pill pill-critico">🔴 Vencido</span><span style="font-size:12px;color:var(--muted)">21–27 jul</span></div>
+            <div class="week-kpis">
+              <span>IDs: <strong>2</strong></span>
+              <span>GMV: <strong>$ 51</strong></span>
+              <button class="btn-dl" onclick="event.stopPropagation();downloadCSV('LOGGI','W30')">⬇ CSV</button>
+              <i class="chevron">▾</i>
+            </div>
+          </div>
+          <div class="week-body hidden">
+            <table><thead><tr><th>UF</th><th class="num-right">IDs</th><th>GMV (USD)</th><th class="num-right">%</th></tr></thead>
+            <tbody><tr>
+              <td class="uf-name">Paraná</td>
+              <td class="num-right">1</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:81%;background:#C0392B"></div></div>$ 42</div></td>
+              <td class="num-right">81.1%</td>
+            </tr><tr>
+              <td class="uf-name">Mato Grosso do Sul</td>
+              <td class="num-right">1</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:19%;background:#C0392B"></div></div>$ 10</div></td>
+              <td class="num-right">18.9%</td>
+            </tr></tbody></table>
+          </div>
+        </div>
+<div class="week-block">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <div class="week-title"><span>W31</span><span class="week-pill pill-critico">🔴 Vencido</span><span style="font-size:12px;color:var(--muted)">28 jul–3 ago</span></div>
+            <div class="week-kpis">
+              <span>IDs: <strong>6</strong></span>
+              <span>GMV: <strong>$ 505</strong></span>
+              <button class="btn-dl" onclick="event.stopPropagation();downloadCSV('LOGGI','W31')">⬇ CSV</button>
+              <i class="chevron">▾</i>
+            </div>
+          </div>
+          <div class="week-body hidden">
+            <table><thead><tr><th>UF</th><th class="num-right">IDs</th><th>GMV (USD)</th><th class="num-right">%</th></tr></thead>
+            <tbody><tr>
+              <td class="uf-name">Minas Gerais</td>
+              <td class="num-right">1</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:81%;background:#C0392B"></div></div>$ 411</div></td>
+              <td class="num-right">81.4%</td>
+            </tr><tr>
+              <td class="uf-name">São Paulo</td>
+              <td class="num-right">2</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:14%;background:#C0392B"></div></div>$ 69</div></td>
+              <td class="num-right">13.7%</td>
+            </tr><tr>
+              <td class="uf-name">Rio de Janeiro</td>
+              <td class="num-right">1</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:2%;background:#C0392B"></div></div>$ 11</div></td>
+              <td class="num-right">2.2%</td>
+            </tr><tr>
+              <td class="uf-name">Paraná</td>
+              <td class="num-right">1</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:2%;background:#C0392B"></div></div>$ 9</div></td>
+              <td class="num-right">1.8%</td>
+            </tr><tr>
+              <td class="uf-name">Bahia</td>
+              <td class="num-right">1</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:1%;background:#C0392B"></div></div>$ 4</div></td>
+              <td class="num-right">0.8%</td>
+            </tr></tbody></table>
+          </div>
+        </div>
+
     </div>
-  </div>
+<div class="carrier-panel" id="panel-DOMINALOG_EXPRESS">
+      <div class="panel-header">
+        <div class="panel-carrier-name"><div class="panel-dot" style="background:#D85A30"></div>DOMINALOG EXPRESS</div>
+        <div class="panel-kpis">
+          <div class="panel-kpi"><div class="panel-kpi-val">4</div><div class="panel-kpi-lbl">Total IDs</div></div>
+          <div class="panel-kpi"><div class="panel-kpi-val" style="color:var(--ok)">$ 423</div><div class="panel-kpi-lbl">GMV Total</div></div>
+          <button class="btn-dl" style="font-size:12px;padding:6px 14px;" onclick="downloadCSV('DOMINALOG_EXPRESS',null)">⬇ Baixar todos</button>
+        </div>
+      </div>
+      <div class="week-block">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <div class="week-title"><span>W30</span><span class="week-pill pill-critico">🔴 Vencido</span><span style="font-size:12px;color:var(--muted)">21–27 jul</span></div>
+            <div class="week-kpis">
+              <span>IDs: <strong>2</strong></span>
+              <span>GMV: <strong>$ 259</strong></span>
+              <button class="btn-dl" onclick="event.stopPropagation();downloadCSV('DOMINALOG_EXPRESS','W30')">⬇ CSV</button>
+              <i class="chevron">▾</i>
+            </div>
+          </div>
+          <div class="week-body hidden">
+            <table><thead><tr><th>UF</th><th class="num-right">IDs</th><th>GMV (USD)</th><th class="num-right">%</th></tr></thead>
+            <tbody><tr>
+              <td class="uf-name">Minas Gerais</td>
+              <td class="num-right">1</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:60%;background:#C0392B"></div></div>$ 155</div></td>
+              <td class="num-right">59.8%</td>
+            </tr><tr>
+              <td class="uf-name">Paraná</td>
+              <td class="num-right">1</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:40%;background:#C0392B"></div></div>$ 104</div></td>
+              <td class="num-right">40.2%</td>
+            </tr></tbody></table>
+          </div>
+        </div>
+<div class="week-block">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <div class="week-title"><span>W31</span><span class="week-pill pill-critico">🔴 Vencido</span><span style="font-size:12px;color:var(--muted)">28 jul–3 ago</span></div>
+            <div class="week-kpis">
+              <span>IDs: <strong>1</strong></span>
+              <span>GMV: <strong>$ 94</strong></span>
+              <button class="btn-dl" onclick="event.stopPropagation();downloadCSV('DOMINALOG_EXPRESS','W31')">⬇ CSV</button>
+              <i class="chevron">▾</i>
+            </div>
+          </div>
+          <div class="week-body hidden">
+            <table><thead><tr><th>UF</th><th class="num-right">IDs</th><th>GMV (USD)</th><th class="num-right">%</th></tr></thead>
+            <tbody><tr>
+              <td class="uf-name">Paraná</td>
+              <td class="num-right">1</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:100%;background:#C0392B"></div></div>$ 94</div></td>
+              <td class="num-right">100.0%</td>
+            </tr></tbody></table>
+          </div>
+        </div>
+<div class="week-block">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <div class="week-title"><span>W32</span><span class="week-pill pill-atencao">🟠 Atenção</span><span style="font-size:12px;color:var(--muted)">4–10 ago</span></div>
+            <div class="week-kpis">
+              <span>IDs: <strong>1</strong></span>
+              <span>GMV: <strong>$ 70</strong></span>
+              <button class="btn-dl" onclick="event.stopPropagation();downloadCSV('DOMINALOG_EXPRESS','W32')">⬇ CSV</button>
+              <i class="chevron">▾</i>
+            </div>
+          </div>
+          <div class="week-body hidden">
+            <table><thead><tr><th>UF</th><th class="num-right">IDs</th><th>GMV (USD)</th><th class="num-right">%</th></tr></thead>
+            <tbody><tr>
+              <td class="uf-name">Minas Gerais</td>
+              <td class="num-right">1</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:100%;background:#E67E22"></div></div>$ 70</div></td>
+              <td class="num-right">100.0%</td>
+            </tr></tbody></table>
+          </div>
+        </div>
+
+    </div>
+<div class="carrier-panel" id="panel-CARVALIMA">
+      <div class="panel-header">
+        <div class="panel-carrier-name"><div class="panel-dot" style="background:#888780"></div>CARVALIMA</div>
+        <div class="panel-kpis">
+          <div class="panel-kpi"><div class="panel-kpi-val">5</div><div class="panel-kpi-lbl">Total IDs</div></div>
+          <div class="panel-kpi"><div class="panel-kpi-val" style="color:var(--ok)">$ 419</div><div class="panel-kpi-lbl">GMV Total</div></div>
+          <button class="btn-dl" style="font-size:12px;padding:6px 14px;" onclick="downloadCSV('CARVALIMA',null)">⬇ Baixar todos</button>
+        </div>
+      </div>
+      <div class="week-block">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <div class="week-title"><span>W29</span><span class="week-pill pill-critico">🔴 Vencido</span><span style="font-size:12px;color:var(--muted)">14–20 jul</span></div>
+            <div class="week-kpis">
+              <span>IDs: <strong>1</strong></span>
+              <span>GMV: <strong>$ 47</strong></span>
+              <button class="btn-dl" onclick="event.stopPropagation();downloadCSV('CARVALIMA','W29')">⬇ CSV</button>
+              <i class="chevron">▾</i>
+            </div>
+          </div>
+          <div class="week-body hidden">
+            <table><thead><tr><th>UF</th><th class="num-right">IDs</th><th>GMV (USD)</th><th class="num-right">%</th></tr></thead>
+            <tbody><tr>
+              <td class="uf-name">Mato Grosso</td>
+              <td class="num-right">1</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:100%;background:#C0392B"></div></div>$ 47</div></td>
+              <td class="num-right">100.0%</td>
+            </tr></tbody></table>
+          </div>
+        </div>
+<div class="week-block">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <div class="week-title"><span>W30</span><span class="week-pill pill-critico">🔴 Vencido</span><span style="font-size:12px;color:var(--muted)">21–27 jul</span></div>
+            <div class="week-kpis">
+              <span>IDs: <strong>3</strong></span>
+              <span>GMV: <strong>$ 365</strong></span>
+              <button class="btn-dl" onclick="event.stopPropagation();downloadCSV('CARVALIMA','W30')">⬇ CSV</button>
+              <i class="chevron">▾</i>
+            </div>
+          </div>
+          <div class="week-body hidden">
+            <table><thead><tr><th>UF</th><th class="num-right">IDs</th><th>GMV (USD)</th><th class="num-right">%</th></tr></thead>
+            <tbody><tr>
+              <td class="uf-name">Pará</td>
+              <td class="num-right">1</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:79%;background:#C0392B"></div></div>$ 290</div></td>
+              <td class="num-right">79.4%</td>
+            </tr><tr>
+              <td class="uf-name">Acre</td>
+              <td class="num-right">1</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:16%;background:#C0392B"></div></div>$ 60</div></td>
+              <td class="num-right">16.3%</td>
+            </tr><tr>
+              <td class="uf-name">Rondônia</td>
+              <td class="num-right">1</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:4%;background:#C0392B"></div></div>$ 16</div></td>
+              <td class="num-right">4.3%</td>
+            </tr></tbody></table>
+          </div>
+        </div>
+<div class="week-block">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <div class="week-title"><span>W31</span><span class="week-pill pill-critico">🔴 Vencido</span><span style="font-size:12px;color:var(--muted)">28 jul–3 ago</span></div>
+            <div class="week-kpis">
+              <span>IDs: <strong>1</strong></span>
+              <span>GMV: <strong>$ 7</strong></span>
+              <button class="btn-dl" onclick="event.stopPropagation();downloadCSV('CARVALIMA','W31')">⬇ CSV</button>
+              <i class="chevron">▾</i>
+            </div>
+          </div>
+          <div class="week-body hidden">
+            <table><thead><tr><th>UF</th><th class="num-right">IDs</th><th>GMV (USD)</th><th class="num-right">%</th></tr></thead>
+            <tbody><tr>
+              <td class="uf-name">Pará</td>
+              <td class="num-right">1</td>
+              <td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:100%;background:#C0392B"></div></div>$ 7</div></td>
+              <td class="num-right">100.0%</td>
+            </tr></tbody></table>
+          </div>
+        </div>
+
+    </div>
 
 </main>
 
 <script>
+const CSV_DATA = {"JeT_EXPRESS_BRAZIL": {"W29": [{"SHP_SHIPMENT_ID": "47359838737", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "São Paulo", "SHP_DATE_PAY_BPP_BUYER": "15 de jul. de 2026", "GMV_USD": "44,73", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47262189755", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "16 de jul. de 2026", "GMV_USD": "10,25", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47261714433", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Rio Grande do Sul", "SHP_DATE_PAY_BPP_BUYER": "14 de jul. de 2026", "GMV_USD": "18,76", "SHP_SUBSTATUS_ID": "stale", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47261417188", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Rio Grande do Sul", "SHP_DATE_PAY_BPP_BUYER": "14 de jul. de 2026", "GMV_USD": "7,72", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47260540994", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Rio Grande do Sul", "SHP_DATE_PAY_BPP_BUYER": "16 de jul. de 2026", "GMV_USD": "14,51", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47255765707", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "15 de jul. de 2026", "GMV_USD": "17,39", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47255253972", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Rio Grande do Sul", "SHP_DATE_PAY_BPP_BUYER": "17 de jul. de 2026", "GMV_USD": "37,67", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47254702014", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "16 de jul. de 2026", "GMV_USD": "4,68", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47251932835", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Rio Grande do Sul", "SHP_DATE_PAY_BPP_BUYER": "13 de jul. de 2026", "GMV_USD": "3,71", "SHP_SUBSTATUS_ID": "stale", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47245747205", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "14 de jul. de 2026", "GMV_USD": "11,71", "SHP_SUBSTATUS_ID": "stale", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47239571584", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "15 de jul. de 2026", "GMV_USD": "10,73", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47237265128", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "17 de jul. de 2026", "GMV_USD": "7,59", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47233286543", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "16 de jul. de 2026", "GMV_USD": "6,67", "SHP_SUBSTATUS_ID": "stale", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47227682852", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Rio Grande do Sul", "SHP_DATE_PAY_BPP_BUYER": "15 de jul. de 2026", "GMV_USD": "11,31", "SHP_SUBSTATUS_ID": "stale", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47208175653", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Minas Gerais", "SHP_DATE_PAY_BPP_BUYER": "17 de jul. de 2026", "GMV_USD": "9,92", "SHP_SUBSTATUS_ID": "stale", "SHP_STATUS_ID": "shipped"}], "W30": [{"SHP_SHIPMENT_ID": "47525119797", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Minas Gerais", "SHP_DATE_PAY_BPP_BUYER": "24 de jul. de 2026", "GMV_USD": "32,68", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47512546285", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "São Paulo", "SHP_DATE_PAY_BPP_BUYER": "24 de jul. de 2026", "GMV_USD": "20,66", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47440612833", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "São Paulo", "SHP_DATE_PAY_BPP_BUYER": "24 de jul. de 2026", "GMV_USD": "14,61", "SHP_SUBSTATUS_ID": "", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47404912757", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "São Paulo", "SHP_DATE_PAY_BPP_BUYER": "22 de jul. de 2026", "GMV_USD": "49,71", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47339093084", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Rio Grande do Sul", "SHP_DATE_PAY_BPP_BUYER": "21 de jul. de 2026", "GMV_USD": "774,8", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47311399329", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Paraíba", "SHP_DATE_PAY_BPP_BUYER": "24 de jul. de 2026", "GMV_USD": "35,45", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47310791521", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Rondônia", "SHP_DATE_PAY_BPP_BUYER": "21 de jul. de 2026", "GMV_USD": "842,55", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47303450106", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Pará", "SHP_DATE_PAY_BPP_BUYER": "24 de jul. de 2026", "GMV_USD": "727,76", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47270648953", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Minas Gerais", "SHP_DATE_PAY_BPP_BUYER": "21 de jul. de 2026", "GMV_USD": "7,72", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47268750937", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Bahia", "SHP_DATE_PAY_BPP_BUYER": "22 de jul. de 2026", "GMV_USD": "385,38", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47264175197", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "20 de jul. de 2026", "GMV_USD": "34,8", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47263036029", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Bahia", "SHP_DATE_PAY_BPP_BUYER": "23 de jul. de 2026", "GMV_USD": "11,6", "SHP_SUBSTATUS_ID": "stale", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47254632637", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Rio Grande do Sul", "SHP_DATE_PAY_BPP_BUYER": "20 de jul. de 2026", "GMV_USD": "55,56", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47239807915", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "21 de jul. de 2026", "GMV_USD": "11,41", "SHP_SUBSTATUS_ID": "stale", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47231046916", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Rio Grande do Sul", "SHP_DATE_PAY_BPP_BUYER": "21 de jul. de 2026", "GMV_USD": "12,87", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47224939134", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Rio Grande do Sul", "SHP_DATE_PAY_BPP_BUYER": "21 de jul. de 2026", "GMV_USD": "8,53", "SHP_SUBSTATUS_ID": "stale", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47214281604", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Rio Grande do Sul", "SHP_DATE_PAY_BPP_BUYER": "22 de jul. de 2026", "GMV_USD": "9,97", "SHP_SUBSTATUS_ID": "stale", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47124533433", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "São Paulo", "SHP_DATE_PAY_BPP_BUYER": "22 de jul. de 2026", "GMV_USD": "9,98", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "ready_to_ship"}, {"SHP_SHIPMENT_ID": "47098004450", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Bahia", "SHP_DATE_PAY_BPP_BUYER": "23 de jul. de 2026", "GMV_USD": "13,72", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "ready_to_ship"}, {"SHP_SHIPMENT_ID": "47079938105", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Piauí", "SHP_DATE_PAY_BPP_BUYER": "24 de jul. de 2026", "GMV_USD": "9,8", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "ready_to_ship"}, {"SHP_SHIPMENT_ID": "47054231774", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Piauí", "SHP_DATE_PAY_BPP_BUYER": "22 de jul. de 2026", "GMV_USD": "17,2", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "ready_to_ship"}, {"SHP_SHIPMENT_ID": "47013235879", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Pernambuco", "SHP_DATE_PAY_BPP_BUYER": "24 de jul. de 2026", "GMV_USD": "21,07", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "ready_to_ship"}], "W31": [{"SHP_SHIPMENT_ID": "47575489355", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "São Paulo", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "16,01", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47561935965", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "São Paulo", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "9,77", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47474158819", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "29 de jul. de 2026", "GMV_USD": "17,36", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47471586226", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "São Paulo", "SHP_DATE_PAY_BPP_BUYER": "28 de jul. de 2026", "GMV_USD": "621,67", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47465161458", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "São Paulo", "SHP_DATE_PAY_BPP_BUYER": "30 de jul. de 2026", "GMV_USD": "83,22", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47461451881", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Bahia", "SHP_DATE_PAY_BPP_BUYER": "29 de jul. de 2026", "GMV_USD": "386,68", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47444996382", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Rio de Janeiro", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "560,74", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47444599741", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "São Paulo", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "27,65", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47430886913", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "São Paulo", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "15,96", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47428438649", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Pará", "SHP_DATE_PAY_BPP_BUYER": "29 de jul. de 2026", "GMV_USD": "812,13", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47412521343", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Minas Gerais", "SHP_DATE_PAY_BPP_BUYER": "28 de jul. de 2026", "GMV_USD": "67,68", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47404747892", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Rio Grande do Sul", "SHP_DATE_PAY_BPP_BUYER": "28 de jul. de 2026", "GMV_USD": "519,97", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47400889420", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Rio Grande do Sul", "SHP_DATE_PAY_BPP_BUYER": "27 de jul. de 2026", "GMV_USD": "5,78", "SHP_SUBSTATUS_ID": "bad_address", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47374964468", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Rio Grande do Sul", "SHP_DATE_PAY_BPP_BUYER": "27 de jul. de 2026", "GMV_USD": "15,55", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47364125985", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Ceará", "SHP_DATE_PAY_BPP_BUYER": "29 de jul. de 2026", "GMV_USD": "30,37", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47336538704", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "São Paulo", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "15,11", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47317244754", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Amazonas", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "40,17", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47313874434", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Maranhão", "SHP_DATE_PAY_BPP_BUYER": "30 de jul. de 2026", "GMV_USD": "187,15", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47311887485", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Pará", "SHP_DATE_PAY_BPP_BUYER": "27 de jul. de 2026", "GMV_USD": "145,37", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47292800468", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "São Paulo", "SHP_DATE_PAY_BPP_BUYER": "30 de jul. de 2026", "GMV_USD": "10,8", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "ready_to_ship"}, {"SHP_SHIPMENT_ID": "47278194536", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "São Paulo", "SHP_DATE_PAY_BPP_BUYER": "27 de jul. de 2026", "GMV_USD": "11,01", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "ready_to_ship"}, {"SHP_SHIPMENT_ID": "47261889505", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Rio Grande do Sul", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "11,22", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47259833844", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "29 de jul. de 2026", "GMV_USD": "11,59", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "ready_to_ship"}, {"SHP_SHIPMENT_ID": "47257672644", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Ceará", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "3,87", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "ready_to_ship"}, {"SHP_SHIPMENT_ID": "47255271117", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "29 de jul. de 2026", "GMV_USD": "8,79", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47252831960", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Rio Grande do Sul", "SHP_DATE_PAY_BPP_BUYER": "30 de jul. de 2026", "GMV_USD": "15,4", "SHP_SUBSTATUS_ID": "stale", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47252763976", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "30 de jul. de 2026", "GMV_USD": "13,64", "SHP_SUBSTATUS_ID": "stale", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47251309149", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "30 de jul. de 2026", "GMV_USD": "8,61", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47250717940", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Rio Grande do Sul", "SHP_DATE_PAY_BPP_BUYER": "30 de jul. de 2026", "GMV_USD": "4,49", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47250671847", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "São Paulo", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "5,6", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "ready_to_ship"}, {"SHP_SHIPMENT_ID": "47246116091", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Rondônia", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "377,61", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "ready_to_ship"}, {"SHP_SHIPMENT_ID": "47243137814", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Goiás", "SHP_DATE_PAY_BPP_BUYER": "29 de jul. de 2026", "GMV_USD": "8,96", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "ready_to_ship"}, {"SHP_SHIPMENT_ID": "47242474919", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Minas Gerais", "SHP_DATE_PAY_BPP_BUYER": "28 de jul. de 2026", "GMV_USD": "3,71", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "ready_to_ship"}, {"SHP_SHIPMENT_ID": "47238285663", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "São Paulo", "SHP_DATE_PAY_BPP_BUYER": "30 de jul. de 2026", "GMV_USD": "3,88", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "ready_to_ship"}, {"SHP_SHIPMENT_ID": "47236740951", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Tocantins", "SHP_DATE_PAY_BPP_BUYER": "30 de jul. de 2026", "GMV_USD": "11,71", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "ready_to_ship"}, {"SHP_SHIPMENT_ID": "47229056299", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Rio Grande do Sul", "SHP_DATE_PAY_BPP_BUYER": "30 de jul. de 2026", "GMV_USD": "6,26", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "ready_to_ship"}, {"SHP_SHIPMENT_ID": "47228386042", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "São Paulo", "SHP_DATE_PAY_BPP_BUYER": "29 de jul. de 2026", "GMV_USD": "10,31", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "ready_to_ship"}, {"SHP_SHIPMENT_ID": "47227484234", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Minas Gerais", "SHP_DATE_PAY_BPP_BUYER": "28 de jul. de 2026", "GMV_USD": "10,73", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47218987231", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "27 de jul. de 2026", "GMV_USD": "11,3", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47214808654", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "9,8", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47205111796", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Maranhão", "SHP_DATE_PAY_BPP_BUYER": "28 de jul. de 2026", "GMV_USD": "10,8", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47204320277", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Ceará", "SHP_DATE_PAY_BPP_BUYER": "29 de jul. de 2026", "GMV_USD": "19,26", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "ready_to_ship"}, {"SHP_SHIPMENT_ID": "47203127739", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "São Paulo", "SHP_DATE_PAY_BPP_BUYER": "28 de jul. de 2026", "GMV_USD": "17,37", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "ready_to_ship"}, {"SHP_SHIPMENT_ID": "47201554718", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Goiás", "SHP_DATE_PAY_BPP_BUYER": "27 de jul. de 2026", "GMV_USD": "13,91", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "ready_to_ship"}, {"SHP_SHIPMENT_ID": "47199257702", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "29 de jul. de 2026", "GMV_USD": "10,01", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "ready_to_ship"}, {"SHP_SHIPMENT_ID": "47186293080", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Distrito Federal", "SHP_DATE_PAY_BPP_BUYER": "28 de jul. de 2026", "GMV_USD": "9,89", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "ready_to_ship"}, {"SHP_SHIPMENT_ID": "47184420357", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "30 de jul. de 2026", "GMV_USD": "5,91", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "ready_to_ship"}, {"SHP_SHIPMENT_ID": "47161851064", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "São Paulo", "SHP_DATE_PAY_BPP_BUYER": "27 de jul. de 2026", "GMV_USD": "5,5", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "ready_to_ship"}, {"SHP_SHIPMENT_ID": "47160212601", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Distrito Federal", "SHP_DATE_PAY_BPP_BUYER": "28 de jul. de 2026", "GMV_USD": "14,76", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "ready_to_ship"}, {"SHP_SHIPMENT_ID": "47128936141", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Rio de Janeiro", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "8,52", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "ready_to_ship"}, {"SHP_SHIPMENT_ID": "47095666497", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "27 de jul. de 2026", "GMV_USD": "4,99", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47094115302", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Rondônia", "SHP_DATE_PAY_BPP_BUYER": "30 de jul. de 2026", "GMV_USD": "11,83", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "ready_to_ship"}, {"SHP_SHIPMENT_ID": "47067000124", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Rio Grande do Sul", "SHP_DATE_PAY_BPP_BUYER": "27 de jul. de 2026", "GMV_USD": "15,25", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "ready_to_ship"}, {"SHP_SHIPMENT_ID": "47065981387", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Piauí", "SHP_DATE_PAY_BPP_BUYER": "27 de jul. de 2026", "GMV_USD": "24,66", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "ready_to_ship"}, {"SHP_SHIPMENT_ID": "47033559799", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Paraíba", "SHP_DATE_PAY_BPP_BUYER": "28 de jul. de 2026", "GMV_USD": "7,71", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "ready_to_ship"}, {"SHP_SHIPMENT_ID": "47009491113", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Amapá", "SHP_DATE_PAY_BPP_BUYER": "28 de jul. de 2026", "GMV_USD": "97", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "ready_to_ship"}], "W32": [{"SHP_SHIPMENT_ID": "47586849890", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Minas Gerais", "SHP_DATE_PAY_BPP_BUYER": "3 de ago. de 2026", "GMV_USD": "37,21", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47534859963", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Minas Gerais", "SHP_DATE_PAY_BPP_BUYER": "3 de ago. de 2026", "GMV_USD": "6,31", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47450742560", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "São Paulo", "SHP_DATE_PAY_BPP_BUYER": "3 de ago. de 2026", "GMV_USD": "39,64", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47439037006", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "São Paulo", "SHP_DATE_PAY_BPP_BUYER": "3 de ago. de 2026", "GMV_USD": "32,71", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47375197516", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Ceará", "SHP_DATE_PAY_BPP_BUYER": "3 de ago. de 2026", "GMV_USD": "26,87", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47271005159", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "3 de ago. de 2026", "GMV_USD": "12,2", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47269543409", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Minas Gerais", "SHP_DATE_PAY_BPP_BUYER": "3 de ago. de 2026", "GMV_USD": "3,77", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "ready_to_ship"}, {"SHP_SHIPMENT_ID": "47262978836", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Ceará", "SHP_DATE_PAY_BPP_BUYER": "3 de ago. de 2026", "GMV_USD": "5,59", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "ready_to_ship"}, {"SHP_SHIPMENT_ID": "47249316355", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Tocantins", "SHP_DATE_PAY_BPP_BUYER": "3 de ago. de 2026", "GMV_USD": "4,64", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "ready_to_ship"}, {"SHP_SHIPMENT_ID": "47244325809", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "3 de ago. de 2026", "GMV_USD": "4,21", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47194826763", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Pernambuco", "SHP_DATE_PAY_BPP_BUYER": "3 de ago. de 2026", "GMV_USD": "42,52", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "ready_to_ship"}, {"SHP_SHIPMENT_ID": "47183088448", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Rondônia", "SHP_DATE_PAY_BPP_BUYER": "3 de ago. de 2026", "GMV_USD": "15,62", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "ready_to_ship"}, {"SHP_SHIPMENT_ID": "47178284422", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Minas Gerais", "SHP_DATE_PAY_BPP_BUYER": "3 de ago. de 2026", "GMV_USD": "7,92", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "ready_to_ship"}, {"SHP_SHIPMENT_ID": "47143070132", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Pernambuco", "SHP_DATE_PAY_BPP_BUYER": "3 de ago. de 2026", "GMV_USD": "6,78", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "ready_to_ship"}, {"SHP_SHIPMENT_ID": "47125042795", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "Rio de Janeiro", "SHP_DATE_PAY_BPP_BUYER": "3 de ago. de 2026", "GMV_USD": "5,94", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "ready_to_ship"}, {"SHP_SHIPMENT_ID": "47110454242", "SHP_CARRIER_ID": "J&T EXPRESS BRAZIL", "SHP_RECEIVER_STATE_NAME": "São Paulo", "SHP_DATE_PAY_BPP_BUYER": "3 de ago. de 2026", "GMV_USD": "5,83", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "ready_to_ship"}]}, "JAD_LOGISTICA_LTDA": {"W25": [{"SHP_SHIPMENT_ID": "47272838214", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "21,28", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47272749519", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "7,71", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47272446648", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "13,75", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47271470612", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "23,12", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47271282313", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "18,36", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47271193807", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "15,05", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47270785444", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "28,13", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47270770231", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "33,76", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47270249295", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "7,49", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47269634259", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "32,88", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47269459602", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "6,96", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47269008557", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "7,71", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47268987135", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "16,83", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47268629286", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "28,29", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47268412689", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "5,49", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47267595789", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "7,02", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47267372922", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "8,7", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47266845006", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "5,9", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47266791434", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "11,26", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47266701546", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "19,3", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47266570668", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "5,48", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47266420081", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "31,24", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47266308500", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "6,75", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47266221743", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "6,48", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47266002946", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "15,07", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47265924269", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "5,03", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47265727866", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "9,28", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47265159577", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "9,67", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47265100670", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "13,21", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47264761294", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "21,56", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47264722680", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "11,61", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47264331982", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "19,25", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47263685502", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "70,41", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47263678578", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "67,9", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47263156967", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "11,1", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47263131420", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "30,82", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47263090844", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "6,4", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47262846593", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "22,1", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47262012298", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "22,81", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47261998364", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "3,68", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47261921717", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "7,01", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47261867940", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "6,89", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47261297040", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "18,51", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47261033009", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "11,24", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47261026920", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "6,19", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47260914557", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "5,63", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47260583939", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "13,35", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47260401768", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "14,35", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47260054804", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "44,49", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47259627215", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "63,06", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47259540678", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "9,47", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47259504162", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "31,53", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47259493480", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "36,35", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47259493472", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "36,35", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47259493460", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "36,35", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47259405513", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "38,5", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47259382398", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "4,64", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47259111727", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "3,68", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47258651051", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "11,6", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47257990797", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "35,74", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47257532279", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "4,4", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47257522513", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "28,63", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47257432386", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "24,93", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47257401676", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "11,59", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47257024975", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "135,02", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47257022192", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "23,77", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47256994300", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "23,77", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47256875939", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "23,15", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47256700410", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "176,81", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47256677896", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "7,19", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47256677520", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "12,92", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47256677342", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "13,33", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47256604457", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "3,85", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47256570380", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "27,04", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47256570290", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "56,27", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47256449726", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "38,81", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47256446211", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "4,06", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47256419166", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "73,78", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47256331547", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "36,75", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47256215800", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "3,68", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47256170331", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "18,18", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47256055807", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "24,3", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47256025118", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "5,03", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47255724288", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "81,26", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47255709908", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "18,41", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47255636020", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "9,45", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47255405300", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "58,52", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47255361059", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "9,36", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47255238000", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "35,12", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47255220867", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "27,28", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47254541103", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "139,13", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47254536317", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Rio Grande do Sul", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "18,52", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47254326187", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "7,18", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47254059902", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "32,15", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47252899954", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "106,82", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47252709822", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "9,71", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47252261463", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "36,88", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47252203726", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "24,12", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47252117505", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "112,88", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47251040031", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "43,13", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47250881424", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "3,88", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47250408912", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "45,86", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47248811575", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Rio Grande do Sul", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "107,72", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47248497187", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "77,9", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47248409771", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "4,47", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47248407176", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "10,54", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47248203135", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "37,83", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47248184144", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "23,4", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47248079243", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "19,32", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47247303835", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "13,81", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47246684374", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "11,77", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47246559778", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "17,56", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47246527896", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "19,51", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47245945576", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "9,26", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47245230613", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "33,4", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47244656090", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "3,9", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47244349567", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "6,96", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47244200191", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "46,64", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47242650659", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "10,91", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47240915332", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "18,74", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47240752068", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "7,19", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47240592679", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "23,41", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47240152356", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "3,88", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47238921004", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "54,02", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47237988004", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "36,28", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47235687536", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "105,18", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47235643907", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "36,88", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47234884064", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "21,05", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47230856086", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "40,66", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47229322488", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "7,87", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47226956758", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "7,93", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47225978428", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "15,67", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47225645802", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "7,23", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47224333996", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "46,61", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47223369308", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "23,28", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47223034406", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "56,42", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47221420993", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "64,45", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47220717173", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "9,9", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47219166474", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "11,9", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47218348300", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Amazonas", "SHP_DATE_PAY_BPP_BUYER": "16 de jun. de 2026", "GMV_USD": "374,89", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47205825385", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "19 de jun. de 2026", "GMV_USD": "9,9", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}], "W26": [{"SHP_SHIPMENT_ID": "47272530030", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "23 de jun. de 2026", "GMV_USD": "4,26", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47270796622", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "23 de jun. de 2026", "GMV_USD": "29,07", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47269968935", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "22 de jun. de 2026", "GMV_USD": "349,18", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47264108876", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Minas Gerais", "SHP_DATE_PAY_BPP_BUYER": "26 de jun. de 2026", "GMV_USD": "28,43", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47261563836", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Minas Gerais", "SHP_DATE_PAY_BPP_BUYER": "24 de jun. de 2026", "GMV_USD": "59,23", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47257736443", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Mato Grosso do Sul", "SHP_DATE_PAY_BPP_BUYER": "22 de jun. de 2026", "GMV_USD": "46,43", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47254573761", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "24 de jun. de 2026", "GMV_USD": "312,04", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47248653906", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "22 de jun. de 2026", "GMV_USD": "23,4", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47233294262", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Maranhão", "SHP_DATE_PAY_BPP_BUYER": "26 de jun. de 2026", "GMV_USD": "51,39", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47227068318", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "25 de jun. de 2026", "GMV_USD": "97,02", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47221873818", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Minas Gerais", "SHP_DATE_PAY_BPP_BUYER": "23 de jun. de 2026", "GMV_USD": "277,68", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47218866481", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Rio Grande do Sul", "SHP_DATE_PAY_BPP_BUYER": "23 de jun. de 2026", "GMV_USD": "37,67", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47217006374", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Mato Grosso do Sul", "SHP_DATE_PAY_BPP_BUYER": "26 de jun. de 2026", "GMV_USD": "67,58", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47213184673", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Minas Gerais", "SHP_DATE_PAY_BPP_BUYER": "25 de jun. de 2026", "GMV_USD": "37,46", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}], "W27": [{"SHP_SHIPMENT_ID": "47257978320", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Mato Grosso do Sul", "SHP_DATE_PAY_BPP_BUYER": "29 de jun. de 2026", "GMV_USD": "128,2", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47244553371", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Mato Grosso do Sul", "SHP_DATE_PAY_BPP_BUYER": "29 de jun. de 2026", "GMV_USD": "105,36", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}], "W29": [{"SHP_SHIPMENT_ID": "47404134630", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Paraíba", "SHP_DATE_PAY_BPP_BUYER": "17 de jul. de 2026", "GMV_USD": "170,21", "SHP_SUBSTATUS_ID": "", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47301527599", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Rio de Janeiro", "SHP_DATE_PAY_BPP_BUYER": "17 de jul. de 2026", "GMV_USD": "19,08", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}], "W31": [{"SHP_SHIPMENT_ID": "47503340801", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Rio Grande do Sul", "SHP_DATE_PAY_BPP_BUYER": "28 de jul. de 2026", "GMV_USD": "22,31", "SHP_SUBSTATUS_ID": "", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47263913461", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Rio Grande do Sul", "SHP_DATE_PAY_BPP_BUYER": "30 de jul. de 2026", "GMV_USD": "5,8", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47261874786", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "São Paulo", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "72,26", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47257397442", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Minas Gerais", "SHP_DATE_PAY_BPP_BUYER": "29 de jul. de 2026", "GMV_USD": "79,48", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47257248129", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Maranhão", "SHP_DATE_PAY_BPP_BUYER": "30 de jul. de 2026", "GMV_USD": "149,73", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47254728552", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Rio Grande do Sul", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "9,36", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47252201241", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Maranhão", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "281,58", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47250991480", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Minas Gerais", "SHP_DATE_PAY_BPP_BUYER": "27 de jul. de 2026", "GMV_USD": "34,12", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47231770836", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Bahia", "SHP_DATE_PAY_BPP_BUYER": "27 de jul. de 2026", "GMV_USD": "10,24", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "ready_to_ship"}, {"SHP_SHIPMENT_ID": "47188315833", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Tocantins", "SHP_DATE_PAY_BPP_BUYER": "29 de jul. de 2026", "GMV_USD": "536,7", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "ready_to_ship"}], "W32": [{"SHP_SHIPMENT_ID": "47261232750", "SHP_CARRIER_ID": "JAD LOGISTICA LTDA", "SHP_RECEIVER_STATE_NAME": "Mato Grosso do Sul", "SHP_DATE_PAY_BPP_BUYER": "3 de ago. de 2026", "GMV_USD": "84,92", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}]}, "LOGGI": {"W30": [{"SHP_SHIPMENT_ID": "47267095853", "SHP_CARRIER_ID": "LOGGI", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "24 de jul. de 2026", "GMV_USD": "41,75", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47244356988", "SHP_CARRIER_ID": "LOGGI", "SHP_RECEIVER_STATE_NAME": "Mato Grosso do Sul", "SHP_DATE_PAY_BPP_BUYER": "20 de jul. de 2026", "GMV_USD": "9,74", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}], "W31": [{"SHP_SHIPMENT_ID": "47474847353", "SHP_CARRIER_ID": "LOGGI", "SHP_RECEIVER_STATE_NAME": "Rio de Janeiro", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "11,17", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47451099769", "SHP_CARRIER_ID": "LOGGI", "SHP_RECEIVER_STATE_NAME": "São Paulo", "SHP_DATE_PAY_BPP_BUYER": "27 de jul. de 2026", "GMV_USD": "40,1", "SHP_SUBSTATUS_ID": "stale", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47378601095", "SHP_CARRIER_ID": "LOGGI", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "30 de jul. de 2026", "GMV_USD": "9,32", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47271391223", "SHP_CARRIER_ID": "LOGGI", "SHP_RECEIVER_STATE_NAME": "São Paulo", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "29,17", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47244282215", "SHP_CARRIER_ID": "LOGGI", "SHP_RECEIVER_STATE_NAME": "Bahia", "SHP_DATE_PAY_BPP_BUYER": "27 de jul. de 2026", "GMV_USD": "3,93", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47228826031", "SHP_CARRIER_ID": "LOGGI", "SHP_RECEIVER_STATE_NAME": "Minas Gerais", "SHP_DATE_PAY_BPP_BUYER": "27 de jul. de 2026", "GMV_USD": "411,26", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}]}, "IMILE_DELIVERY": {"W28": [{"SHP_SHIPMENT_ID": "47235213005", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Amazonas", "SHP_DATE_PAY_BPP_BUYER": "8 de jul. de 2026", "GMV_USD": "30,75", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}], "W29": [{"SHP_SHIPMENT_ID": "47271267000", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Maranhão", "SHP_DATE_PAY_BPP_BUYER": "15 de jul. de 2026", "GMV_USD": "11,77", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}], "W30": [{"SHP_SHIPMENT_ID": "47099220005", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Maranhão", "SHP_DATE_PAY_BPP_BUYER": "22 de jul. de 2026", "GMV_USD": "13,53", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "ready_to_ship"}], "W31": [{"SHP_SHIPMENT_ID": "47442229115", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Amazonas", "SHP_DATE_PAY_BPP_BUYER": "30 de jul. de 2026", "GMV_USD": "79,68", "SHP_SUBSTATUS_ID": "out_for_delivery", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47438330678", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Amazonas", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "81,62", "SHP_SUBSTATUS_ID": "out_for_delivery", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47429372777", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Amazonas", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "866,22", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47406183748", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Amazonas", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "13,11", "SHP_SUBSTATUS_ID": "", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47404008316", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Amazonas", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "11,39", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47400650258", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Piauí", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "14,48", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47397171895", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Pará", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "4,43", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47379669974", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Maranhão", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "20,71", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47379589861", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Maranhão", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "5,36", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47375192419", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Piauí", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "10,03", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47371360751", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Maranhão", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "43,87", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47370445565", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Maranhão", "SHP_DATE_PAY_BPP_BUYER": "30 de jul. de 2026", "GMV_USD": "7,34", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47370290955", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Maranhão", "SHP_DATE_PAY_BPP_BUYER": "30 de jul. de 2026", "GMV_USD": "9,19", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47367230795", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Pará", "SHP_DATE_PAY_BPP_BUYER": "30 de jul. de 2026", "GMV_USD": "9,66", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47358589238", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Piauí", "SHP_DATE_PAY_BPP_BUYER": "30 de jul. de 2026", "GMV_USD": "5,81", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47354806616", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Pará", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "23,13", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47354254608", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Maranhão", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "15,53", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47349717692", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Pará", "SHP_DATE_PAY_BPP_BUYER": "30 de jul. de 2026", "GMV_USD": "32,85", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47348700896", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Piauí", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "11,99", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47348305474", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Pará", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "10,98", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47346925550", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Pará", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "4,45", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47341968020", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Maranhão", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "26,38", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47332171008", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Pará", "SHP_DATE_PAY_BPP_BUYER": "30 de jul. de 2026", "GMV_USD": "49,76", "SHP_SUBSTATUS_ID": "refused_delivery", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47325768038", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Amazonas", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "14,35", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47324788922", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Pará", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "189,56", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47318733443", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Amazonas", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "30,65", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47318700911", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Amazonas", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "15,36", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47315980825", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Amazonas", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "43,91", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47313980743", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Amazonas", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "227,05", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47313703599", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Amazonas", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "69,4", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47312310136", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Pará", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "57,9", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47305728383", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Roraima", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "127,69", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47304353614", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Amazonas", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "196,74", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47299858035", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Roraima", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "53,4", "SHP_SUBSTATUS_ID": "", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47290562539", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Roraima", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "10,41", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47287082743", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Amazonas", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "6,8", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47283519130", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Pará", "SHP_DATE_PAY_BPP_BUYER": "30 de jul. de 2026", "GMV_USD": "107,06", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47280989855", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Roraima", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "5,61", "SHP_SUBSTATUS_ID": "", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47277911748", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Amazonas", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "147,92", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47273034017", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Maranhão", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "11,77", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47241132479", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Amazonas", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "74,16", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47237322077", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Maranhão", "SHP_DATE_PAY_BPP_BUYER": "31 de jul. de 2026", "GMV_USD": "22,71", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}], "W32": [{"SHP_SHIPMENT_ID": "47430907128", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Amazonas", "SHP_DATE_PAY_BPP_BUYER": "3 de ago. de 2026", "GMV_USD": "56,59", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47412416757", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Pará", "SHP_DATE_PAY_BPP_BUYER": "3 de ago. de 2026", "GMV_USD": "57,8", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47383729415", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Maranhão", "SHP_DATE_PAY_BPP_BUYER": "3 de ago. de 2026", "GMV_USD": "18,67", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47372444347", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Maranhão", "SHP_DATE_PAY_BPP_BUYER": "3 de ago. de 2026", "GMV_USD": "4,05", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47367294281", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Pará", "SHP_DATE_PAY_BPP_BUYER": "3 de ago. de 2026", "GMV_USD": "67,84", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47357995587", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Maranhão", "SHP_DATE_PAY_BPP_BUYER": "3 de ago. de 2026", "GMV_USD": "12,62", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47351778750", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Pará", "SHP_DATE_PAY_BPP_BUYER": "3 de ago. de 2026", "GMV_USD": "20,59", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47346093432", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Rondônia", "SHP_DATE_PAY_BPP_BUYER": "3 de ago. de 2026", "GMV_USD": "15,34", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47337515609", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Pará", "SHP_DATE_PAY_BPP_BUYER": "3 de ago. de 2026", "GMV_USD": "73,24", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47316900633", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Pará", "SHP_DATE_PAY_BPP_BUYER": "3 de ago. de 2026", "GMV_USD": "52,16", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47298364674", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Roraima", "SHP_DATE_PAY_BPP_BUYER": "3 de ago. de 2026", "GMV_USD": "68,99", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47297573590", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Maranhão", "SHP_DATE_PAY_BPP_BUYER": "3 de ago. de 2026", "GMV_USD": "4,92", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47243049002", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Maranhão", "SHP_DATE_PAY_BPP_BUYER": "3 de ago. de 2026", "GMV_USD": "12,36", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47234233076", "SHP_CARRIER_ID": "IMILE DELIVERY", "SHP_RECEIVER_STATE_NAME": "Amazonas", "SHP_DATE_PAY_BPP_BUYER": "3 de ago. de 2026", "GMV_USD": "19,55", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}]}, "DOMINALOG_EXPRESS": {"W30": [{"SHP_SHIPMENT_ID": "47268646177", "SHP_CARRIER_ID": "DOMINALOG EXPRESS", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "22 de jul. de 2026", "GMV_USD": "104,24", "SHP_SUBSTATUS_ID": "not_picked_up_at_hub", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47246739227", "SHP_CARRIER_ID": "DOMINALOG EXPRESS", "SHP_RECEIVER_STATE_NAME": "Minas Gerais", "SHP_DATE_PAY_BPP_BUYER": "23 de jul. de 2026", "GMV_USD": "155,15", "SHP_SUBSTATUS_ID": "not_picked_up_at_hub", "SHP_STATUS_ID": "shipped"}], "W31": [{"SHP_SHIPMENT_ID": "47233781589", "SHP_CARRIER_ID": "DOMINALOG EXPRESS", "SHP_RECEIVER_STATE_NAME": "Paraná", "SHP_DATE_PAY_BPP_BUYER": "27 de jul. de 2026", "GMV_USD": "93,58", "SHP_SUBSTATUS_ID": "not_picked_up_at_hub", "SHP_STATUS_ID": "shipped"}], "W32": [{"SHP_SHIPMENT_ID": "47428232738", "SHP_CARRIER_ID": "DOMINALOG EXPRESS", "SHP_RECEIVER_STATE_NAME": "Minas Gerais", "SHP_DATE_PAY_BPP_BUYER": "3 de ago. de 2026", "GMV_USD": "70,26", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}]}, "CARVALIMA": {"W29": [{"SHP_SHIPMENT_ID": "47184222873", "SHP_CARRIER_ID": "CARVALIMA", "SHP_RECEIVER_STATE_NAME": "Mato Grosso", "SHP_DATE_PAY_BPP_BUYER": "15 de jul. de 2026", "GMV_USD": "46,94", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}], "W30": [{"SHP_SHIPMENT_ID": "47354772012", "SHP_CARRIER_ID": "CARVALIMA", "SHP_RECEIVER_STATE_NAME": "Pará", "SHP_DATE_PAY_BPP_BUYER": "24 de jul. de 2026", "GMV_USD": "289,84", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47350254594", "SHP_CARRIER_ID": "CARVALIMA", "SHP_RECEIVER_STATE_NAME": "Acre", "SHP_DATE_PAY_BPP_BUYER": "24 de jul. de 2026", "GMV_USD": "59,6", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}, {"SHP_SHIPMENT_ID": "47323147374", "SHP_CARRIER_ID": "CARVALIMA", "SHP_RECEIVER_STATE_NAME": "Rondônia", "SHP_DATE_PAY_BPP_BUYER": "22 de jul. de 2026", "GMV_USD": "15,56", "SHP_SUBSTATUS_ID": "claimed_me", "SHP_STATUS_ID": "shipped"}], "W31": [{"SHP_SHIPMENT_ID": "47275095040", "SHP_CARRIER_ID": "CARVALIMA", "SHP_RECEIVER_STATE_NAME": "Pará", "SHP_DATE_PAY_BPP_BUYER": "29 de jul. de 2026", "GMV_USD": "7,34", "SHP_SUBSTATUS_ID": "", "SHP_STATUS_ID": "shipped"}]}};
+
+const CARRIER_COLORS = {"JeT_EXPRESS_BRAZIL": "#F5C518", "IMILE_DELIVERY": "#7b6fd4", "JAD_LOGISTICA_LTDA": "#1D9E75", "LOGGI": "#E8821A", "DOMINALOG_EXPRESS": "#D85A30", "CARVALIMA": "#888780"};
+const CARRIER_TEXT = {"JeT_EXPRESS_BRAZIL": "#1A1D3B", "IMILE_DELIVERY": "#fff", "JAD_LOGISTICA_LTDA": "#fff", "LOGGI": "#fff", "DOMINALOG_EXPRESS": "#fff", "CARVALIMA": "#fff"};
+
+function showCarrier(id, tab) {
+  document.querySelectorAll('.carrier-tab').forEach(t => {
+    t.classList.remove('active');
+    t.style.background = '';
+    t.style.borderColor = '';
+    t.style.color = '';
+  });
+  document.querySelectorAll('.carrier-panel').forEach(p => p.classList.remove('active'));
+  tab.classList.add('active');
+  tab.style.background = CARRIER_COLORS[id] || '';
+  tab.style.borderColor = CARRIER_COLORS[id] || '';
+  tab.style.color = CARRIER_TEXT[id] || '#fff';
+  document.getElementById('panel-' + id).classList.add('active');
+}
+
 function toggleWeek(header) {
   const block = header.parentElement;
   const body = block.querySelector('.week-body');
   const isHidden = body.classList.toggle('hidden');
   header.classList.toggle('collapsed', isHidden);
 }
-function filterWeek(week, btn) {
-  document.querySelectorAll('.ctrl-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  document.querySelectorAll('.week-block').forEach(block => {
-    block.style.display = (week === 'all' || block.dataset.week === week) ? '' : 'none';
-  });
-}
-function downloadCSV(week) {
-  alert('CSV disponível — base completa por IDs disponível no arquivo de dados separado.');
+
+function downloadCSV(carrierKey, week) {
+  const data = CSV_DATA[carrierKey];
+  if (!data) return;
+  const rows = week ? (data[week] || []) : Object.values(data).flat();
+  if (rows.length === 0) return;
+  const cols = Object.keys(rows[0]);
+  const header = cols.join(';');
+  const body = rows.map(r => cols.map(c => '"' + String(r[c]||'').replace(/"/g,'""') + '"').join(';')).join('\n');
+  const csv = '\uFEFF' + header + '\n' + body;
+  const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'BPP_' + carrierKey + (week ? '_' + week : '_TOTAL') + '.csv';
+  a.click();
 }
 </script>
 </body>
