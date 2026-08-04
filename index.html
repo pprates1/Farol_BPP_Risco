@@ -75,6 +75,37 @@
   .uf-name{font-weight:600}
   .btn-dl{font-size:11px;font-weight:700;background:var(--navy);color:#fff;border:none;border-radius:6px;padding:4px 10px;cursor:pointer;white-space:nowrap;flex-shrink:0}
   .btn-dl:hover{background:#1a1f5c}
+
+  .consolidado-card{background:var(--white);border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,.07);overflow:hidden}
+  .consolidado-title{padding:14px 20px;font-size:13px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)}
+  .consolidado-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+  .cons-item{padding:16px 20px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s;display:flex;flex-direction:column;gap:4px}
+  .cons-item:nth-child(3n){border-right:none}
+  .cons-item:nth-child(n+4){border-bottom:none}
+  .cons-item:hover{background:var(--surface)}
+  .cons-dot{width:10px;height:10px;border-radius:50%;margin-bottom:2px}
+  .cons-name{font-size:13px;font-weight:700;color:var(--text)}
+  .cons-ids{font-size:22px;font-weight:900;color:var(--navy)}
+  .cons-row{display:flex;gap:8px;align-items:center}
+  .cons-gmv{font-size:12px;color:var(--muted);font-weight:600}
+  .cons-tag-efet{font-size:11px;color:var(--critico);font-weight:600}
+
+  .consolidado-card{background:var(--white);border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,.07);overflow:hidden}
+  .consolidado-title{padding:14px 20px;font-size:13px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)}
+  .consolidado-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+  .cons-item{padding:16px 20px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s;display:flex;flex-direction:column;gap:5px}
+  .cons-item:nth-child(3n){border-right:none}
+  .cons-item:nth-child(n+4){border-bottom:none}
+  .cons-item:hover{background:var(--surface)}
+  .cons-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+  .cons-name{font-size:13px;font-weight:700;color:var(--text)}
+  .cons-ids{font-size:22px;font-weight:900;color:var(--navy);line-height:1.1}
+  .cons-gmv{font-size:12px;color:var(--muted);font-weight:600}
+  .cons-tag-efet{font-size:11px;color:var(--critico);font-weight:600}
+  .cons-ufs{display:flex;flex-direction:column;gap:3px;margin-top:4px;border-top:1px solid var(--border);padding-top:6px}
+  .cons-uf-tag{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted)}
+  .cons-uf-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+  .cons-uf-tag strong{color:var(--text)}
 </style>
 </head>
 <body>
@@ -165,6 +196,74 @@
       <div class="rank-gmv">$ 13.0k</div>
     </div>
 
+  </div>
+
+  
+    <!-- CONSOLIDADO POR CARRIER -->
+  <div class="consolidado-card">
+    <div class="consolidado-title">📦 Consolidado por Carrier</div>
+    <div class="consolidado-grid">
+      <div class="cons-item" onclick="showCarrier('JeT_EXPRESS_BRAZIL', document.querySelector('[onclick*=JeT_EXPRESS_BRAZIL]'))">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+          <div class="cons-dot" style="background:#F5C518"></div>
+          <div class="cons-name">J&T EXPRESS</div>
+        </div>
+        <div class="cons-ids">83.734 IDs</div>
+        <div class="cons-gmv">$ 975.2k</div>
+        <div class="cons-tag-efet">🔴 93 efetivados · $ 7.7k</div>
+        <div class="cons-ufs"><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#F5C518"></span>São Paulo <strong>12.8%</strong></span><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#F5C518"></span>Rio Grande do Sul <strong>10.3%</strong></span><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#F5C518"></span>Bahia <strong>10.0%</strong></span></div>
+      </div>
+      <div class="cons-item" onclick="showCarrier('JAD_LOGISTICA_LTDA', document.querySelector('[onclick*=JAD_LOGISTICA_LTDA]'))">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+          <div class="cons-dot" style="background:#1D9E75"></div>
+          <div class="cons-name">JAD LOGISTICA</div>
+        </div>
+        <div class="cons-ids">2.970 IDs</div>
+        <div class="cons-gmv">$ 310.9k</div>
+        <div class="cons-tag-efet">🔴 169 efetivados · $ 7.2k</div>
+        <div class="cons-ufs"><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#1D9E75"></span>Amazonas <strong>20.4%</strong></span><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#1D9E75"></span>Bahia <strong>13.4%</strong></span><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#1D9E75"></span>Roraima <strong>12.1%</strong></span></div>
+      </div>
+      <div class="cons-item" onclick="showCarrier('IMILE_DELIVERY', document.querySelector('[onclick*=IMILE_DELIVERY]'))">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+          <div class="cons-dot" style="background:#7b6fd4"></div>
+          <div class="cons-name">IMILE DELIVERY</div>
+        </div>
+        <div class="cons-ids">12.201 IDs</div>
+        <div class="cons-gmv">$ 581.5k</div>
+        <div class="cons-tag-efet">🔴 46 efetivados · $ 2.8k</div>
+        <div class="cons-ufs"><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#7b6fd4"></span>Amazonas <strong>52.8%</strong></span><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#7b6fd4"></span>Pará <strong>20.0%</strong></span><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#7b6fd4"></span>Roraima <strong>10.4%</strong></span></div>
+      </div>
+      <div class="cons-item" onclick="showCarrier('LOGGI', document.querySelector('[onclick*=LOGGI]'))">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+          <div class="cons-dot" style="background:#E8821A"></div>
+          <div class="cons-name">LOGGI</div>
+        </div>
+        <div class="cons-ids">2.136 IDs</div>
+        <div class="cons-gmv">$ 159.5k</div>
+        <div class="cons-tag-efet">🔴 8 efetivados · $ 556</div>
+        <div class="cons-ufs"><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#E8821A"></span>Roraima <strong>25.0%</strong></span><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#E8821A"></span>Bahia <strong>12.6%</strong></span><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#E8821A"></span>São Paulo <strong>11.1%</strong></span></div>
+      </div>
+      <div class="cons-item" onclick="showCarrier('DOMINALOG_EXPRESS', document.querySelector('[onclick*=DOMINALOG_EXPRESS]'))">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+          <div class="cons-dot" style="background:#D85A30"></div>
+          <div class="cons-name">DOMINALOG</div>
+        </div>
+        <div class="cons-ids">658 IDs</div>
+        <div class="cons-gmv">$ 124.4k</div>
+        <div class="cons-tag-efet">🔴 3 efetivados · $ 353</div>
+        <div class="cons-ufs"><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#D85A30"></span>São Paulo <strong>47.2%</strong></span><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#D85A30"></span>Bahia <strong>15.5%</strong></span><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#D85A30"></span>Minas Gerais <strong>10.7%</strong></span></div>
+      </div>
+      <div class="cons-item" onclick="showCarrier('CARVALIMA', document.querySelector('[onclick*=CARVALIMA]'))">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+          <div class="cons-dot" style="background:#888780"></div>
+          <div class="cons-name">CARVALIMA</div>
+        </div>
+        <div class="cons-ids">1.239 IDs</div>
+        <div class="cons-gmv">$ 115.2k</div>
+        <div class="cons-tag-efet">🔴 5 efetivados · $ 419</div>
+        <div class="cons-ufs"><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#888780"></span>Pará <strong>40.1%</strong></span><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#888780"></span>Rondônia <strong>27.2%</strong></span><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#888780"></span>Mato Grosso <strong>25.9%</strong></span></div>
+      </div>
+    </div>
   </div>
 
   <div><div class="carrier-tabs"><div class="carrier-tab active" style="background:#F5C518;border-color:#F5C518;color:#1A1D3B;" onclick="showCarrier('JeT_EXPRESS_BRAZIL',this)">
