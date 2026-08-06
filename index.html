@@ -56,9 +56,15 @@
   .cons-item:nth-child(3n){border-right:none}.cons-item:nth-child(n+4){border-bottom:none}.cons-item:hover{background:var(--surface)}
   .cons-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}.cons-name{font-size:13px;font-weight:700;color:var(--text)}
   .cons-ids{font-size:22px;font-weight:900;color:var(--navy);line-height:1.1}.cons-gmv{font-size:12px;color:var(--muted);font-weight:600}
-  .cons-tag-efet{font-size:11px;color:var(--critico);font-weight:600}
+  .cons-metrics{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:4px;border-top:1px solid var(--border);padding-top:8px}
+  .cons-metric-block{display:flex;flex-direction:column;gap:1px}
+  .cons-metric-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.3px;color:var(--muted)}
+  .cons-metric-val{font-size:13px;font-weight:900;color:var(--navy)}
+  .cons-metric-sub{font-size:10px;color:var(--muted);font-weight:500}
+  .cons-metric-block.efet .cons-metric-label{color:var(--critico)}
+  .cons-metric-block.efet .cons-metric-val{color:var(--critico)}
   .cons-ufs{display:flex;flex-direction:column;gap:3px;margin-top:4px;border-top:1px solid var(--border);padding-top:6px}
-  .cons-uf-tag{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted)}.cons-uf-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}.cons-uf-tag strong{color:var(--text)}
+  .cons-uf-tag{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted);font-weight:600}.cons-uf-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}.cons-uf-tag strong{color:var(--text)}
 </style>
 </head>
 <body>
@@ -80,13 +86,125 @@
 </div>
 <main>
   <div class="ranking-card"><div class="ranking-title">🏆 Ranking por GMV</div><div class="rank-row"><div class="rank-num">1</div><div class="rank-dot" style="background:#F5C518"></div><div class="rank-name">J&T EXPRESS BRAZIL</div><div class="rank-bar-wrap"><div class="rank-bar-outer"><div class="rank-bar-inner" style="width:100%;background:#F5C518"></div></div></div><div class="rank-ids">89.961 IDs</div><div class="rank-gmv">$ 1,1M</div></div><div class="rank-row"><div class="rank-num">2</div><div class="rank-dot" style="background:#7b6fd4"></div><div class="rank-name">IMILE DELIVERY</div><div class="rank-bar-wrap"><div class="rank-bar-outer"><div class="rank-bar-inner" style="width:49%;background:#7b6fd4"></div></div></div><div class="rank-ids">11.580 IDs</div><div class="rank-gmv">$ 513,1k</div></div><div class="rank-row"><div class="rank-num">3</div><div class="rank-dot" style="background:#1D9E75"></div><div class="rank-name">JAD LOGISTICA LTDA</div><div class="rank-bar-wrap"><div class="rank-bar-outer"><div class="rank-bar-inner" style="width:30%;background:#1D9E75"></div></div></div><div class="rank-ids">2.997 IDs</div><div class="rank-gmv">$ 321,2k</div></div><div class="rank-row"><div class="rank-num">4</div><div class="rank-dot" style="background:#E8821A"></div><div class="rank-name">LOGGI</div><div class="rank-bar-wrap"><div class="rank-bar-outer"><div class="rank-bar-inner" style="width:13%;background:#E8821A"></div></div></div><div class="rank-ids">1.909 IDs</div><div class="rank-gmv">$ 134,1k</div></div><div class="rank-row"><div class="rank-num">5</div><div class="rank-dot" style="background:#888780"></div><div class="rank-name">CARVALIMA</div><div class="rank-bar-wrap"><div class="rank-bar-outer"><div class="rank-bar-inner" style="width:12%;background:#888780"></div></div></div><div class="rank-ids">1.282 IDs</div><div class="rank-gmv">$ 129,5k</div></div><div class="rank-row"><div class="rank-num">6</div><div class="rank-dot" style="background:#D85A30"></div><div class="rank-name">DOMINALOG EXPRESS</div><div class="rank-bar-wrap"><div class="rank-bar-outer"><div class="rank-bar-inner" style="width:11%;background:#D85A30"></div></div></div><div class="rank-ids">654 IDs</div><div class="rank-gmv">$ 118,3k</div></div></div>
-  <div class="consolidado-card"><div class="consolidado-title">📦 Consolidado por Carrier</div><div class="consolidado-grid"><div class="cons-item" onclick="showCarrier('JeT_EXPRESS_BRAZIL', document.querySelector('[onclick*=JeT_EXPRESS_BRAZIL]'))"><div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><div class="cons-dot" style="background:#F5C518"></div><div class="cons-name">J&T EXPRESS</div></div><div class="cons-ids">89.961 IDs</div><div class="cons-gmv">$ 1,1M</div><div class="cons-tag-efet">🔴 264 efetivados · $ 13,3k</div><div class="cons-ufs"><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#F5C518"></span>Ceará <strong>15.4%</strong></span><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#F5C518"></span>Bahia <strong>10.9%</strong></span><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#F5C518"></span>São Paulo <strong>10.8%</strong></span></div></div>
-<div class="cons-item" onclick="showCarrier('JAD_LOGISTICA_LTDA', document.querySelector('[onclick*=JAD_LOGISTICA_LTDA]'))"><div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><div class="cons-dot" style="background:#1D9E75"></div><div class="cons-name">JAD LOGISTICA</div></div><div class="cons-ids">2.997 IDs</div><div class="cons-gmv">$ 321,2k</div><div class="cons-tag-efet">🔴 156 efetivados · $ 6,7k</div><div class="cons-ufs"><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#1D9E75"></span>Amazonas <strong>21.9%</strong></span><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#1D9E75"></span>Bahia <strong>13.1%</strong></span><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#1D9E75"></span>Roraima <strong>9.4%</strong></span></div></div>
-<div class="cons-item" onclick="showCarrier('IMILE_DELIVERY', document.querySelector('[onclick*=IMILE_DELIVERY]'))"><div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><div class="cons-dot" style="background:#7b6fd4"></div><div class="cons-name">IMILE DELIVERY</div></div><div class="cons-ids">11.580 IDs</div><div class="cons-gmv">$ 513,1k</div><div class="cons-tag-efet">🔴 313 efetivados · $ 15,2k</div><div class="cons-ufs"><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#7b6fd4"></span>Amazonas <strong>45.1%</strong></span><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#7b6fd4"></span>Pará <strong>21.9%</strong></span><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#7b6fd4"></span>Roraima <strong>11.8%</strong></span></div></div>
-<div class="cons-item" onclick="showCarrier('LOGGI', document.querySelector('[onclick*=LOGGI]'))"><div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><div class="cons-dot" style="background:#E8821A"></div><div class="cons-name">LOGGI</div></div><div class="cons-ids">1.909 IDs</div><div class="cons-gmv">$ 134,1k</div><div class="cons-tag-efet">🔴 12 efetivados · $ 808</div><div class="cons-ufs"><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#E8821A"></span>Roraima <strong>19.4%</strong></span><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#E8821A"></span>São Paulo <strong>14.6%</strong></span><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#E8821A"></span>Minas Gerais <strong>10.1%</strong></span></div></div>
-<div class="cons-item" onclick="showCarrier('DOMINALOG_EXPRESS', document.querySelector('[onclick*=DOMINALOG_EXPRESS]'))"><div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><div class="cons-dot" style="background:#D85A30"></div><div class="cons-name">DOMINALOG</div></div><div class="cons-ids">654 IDs</div><div class="cons-gmv">$ 118,3k</div><div class="cons-tag-efet">🔴 5 efetivados · $ 992</div><div class="cons-ufs"><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#D85A30"></span>São Paulo <strong>46.9%</strong></span><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#D85A30"></span>Bahia <strong>16.6%</strong></span><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#D85A30"></span>Minas Gerais <strong>12.8%</strong></span></div></div>
-<div class="cons-item" onclick="showCarrier('CARVALIMA', document.querySelector('[onclick*=CARVALIMA]'))"><div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><div class="cons-dot" style="background:#888780"></div><div class="cons-name">CARVALIMA</div></div><div class="cons-ids">1.282 IDs</div><div class="cons-gmv">$ 129,5k</div><div class="cons-tag-efet">🔴 12 efetivados · $ 1,5k</div><div class="cons-ufs"><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#888780"></span>Pará <strong>37.8%</strong></span><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#888780"></span>Rondônia <strong>28.4%</strong></span><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#888780"></span>Mato Grosso <strong>22.3%</strong></span></div></div>
-</div></div>
+  <div class="consolidado-card"><div class="consolidado-title">📦 Consolidado por Carrier</div><div class="consolidado-grid">
+      <div class="cons-item" onclick="showCarrier('JeT_EXPRESS_BRAZIL', document.querySelector('[onclick*=JeT_EXPRESS_BRAZIL]'))">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:2px">
+          <div class="cons-dot" style="background:#F5C518"></div>
+          <div class="cons-name">J&T EXPRESS</div>
+        </div>
+        <div class="cons-metrics">
+          <div class="cons-metric-block efet">
+            <div class="cons-metric-label">🔴 IDs Efetivados</div>
+            <div class="cons-metric-val">264</div>
+            <div class="cons-metric-sub">$ 13,3k</div>
+          </div>
+          <div class="cons-metric-block">
+            <div class="cons-metric-label">⚠️ IDs em Risco</div>
+            <div class="cons-metric-val">10.785</div>
+            <div class="cons-metric-sub">$ 138,1k</div>
+          </div>
+        </div>
+        <div class="cons-ufs"><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#F5C518"></span>SP</span><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#F5C518"></span>MG</span><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#F5C518"></span>RJ</span></div>
+      </div>
+<div class="cons-item" onclick="showCarrier('JAD_LOGISTICA_LTDA', document.querySelector('[onclick*=JAD_LOGISTICA_LTDA]'))">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:2px">
+          <div class="cons-dot" style="background:#1D9E75"></div>
+          <div class="cons-name">JAD LOGISTICA</div>
+        </div>
+        <div class="cons-metrics">
+          <div class="cons-metric-block efet">
+            <div class="cons-metric-label">🔴 IDs Efetivados</div>
+            <div class="cons-metric-val">156</div>
+            <div class="cons-metric-sub">$ 6,7k</div>
+          </div>
+          <div class="cons-metric-block">
+            <div class="cons-metric-label">⚠️ IDs em Risco</div>
+            <div class="cons-metric-val">589</div>
+            <div class="cons-metric-sub">$ 60,7k</div>
+          </div>
+        </div>
+        <div class="cons-ufs"><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#1D9E75"></span>PR</span><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#1D9E75"></span>SP</span><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#1D9E75"></span>SC</span></div>
+      </div>
+<div class="cons-item" onclick="showCarrier('IMILE_DELIVERY', document.querySelector('[onclick*=IMILE_DELIVERY]'))">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:2px">
+          <div class="cons-dot" style="background:#7b6fd4"></div>
+          <div class="cons-name">IMILE DELIVERY</div>
+        </div>
+        <div class="cons-metrics">
+          <div class="cons-metric-block efet">
+            <div class="cons-metric-label">🔴 IDs Efetivados</div>
+            <div class="cons-metric-val">313</div>
+            <div class="cons-metric-sub">$ 15,2k</div>
+          </div>
+          <div class="cons-metric-block">
+            <div class="cons-metric-label">⚠️ IDs em Risco</div>
+            <div class="cons-metric-val">3.188</div>
+            <div class="cons-metric-sub">$ 135,3k</div>
+          </div>
+        </div>
+        <div class="cons-ufs"><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#7b6fd4"></span>AM</span><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#7b6fd4"></span>PA</span><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#7b6fd4"></span>MA</span></div>
+      </div>
+<div class="cons-item" onclick="showCarrier('LOGGI', document.querySelector('[onclick*=LOGGI]'))">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:2px">
+          <div class="cons-dot" style="background:#E8821A"></div>
+          <div class="cons-name">LOGGI</div>
+        </div>
+        <div class="cons-metrics">
+          <div class="cons-metric-block efet">
+            <div class="cons-metric-label">🔴 IDs Efetivados</div>
+            <div class="cons-metric-val">12</div>
+            <div class="cons-metric-sub">$ 808</div>
+          </div>
+          <div class="cons-metric-block">
+            <div class="cons-metric-label">⚠️ IDs em Risco</div>
+            <div class="cons-metric-val">399</div>
+            <div class="cons-metric-sub">$ 30,8k</div>
+          </div>
+        </div>
+        <div class="cons-ufs"><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#E8821A"></span>SP</span><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#E8821A"></span>MG</span><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#E8821A"></span>RJ</span></div>
+      </div>
+<div class="cons-item" onclick="showCarrier('DOMINALOG_EXPRESS', document.querySelector('[onclick*=DOMINALOG_EXPRESS]'))">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:2px">
+          <div class="cons-dot" style="background:#D85A30"></div>
+          <div class="cons-name">DOMINALOG</div>
+        </div>
+        <div class="cons-metrics">
+          <div class="cons-metric-block efet">
+            <div class="cons-metric-label">🔴 IDs Efetivados</div>
+            <div class="cons-metric-val">5</div>
+            <div class="cons-metric-sub">$ 992</div>
+          </div>
+          <div class="cons-metric-block">
+            <div class="cons-metric-label">⚠️ IDs em Risco</div>
+            <div class="cons-metric-val">148</div>
+            <div class="cons-metric-sub">$ 28,4k</div>
+          </div>
+        </div>
+        <div class="cons-ufs"><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#D85A30"></span>SP</span><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#D85A30"></span>MG</span><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#D85A30"></span>PR</span></div>
+      </div>
+<div class="cons-item" onclick="showCarrier('CARVALIMA', document.querySelector('[onclick*=CARVALIMA]'))">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:2px">
+          <div class="cons-dot" style="background:#888780"></div>
+          <div class="cons-name">CARVALIMA</div>
+        </div>
+        <div class="cons-metrics">
+          <div class="cons-metric-block efet">
+            <div class="cons-metric-label">🔴 IDs Efetivados</div>
+            <div class="cons-metric-val">12</div>
+            <div class="cons-metric-sub">$ 1,5k</div>
+          </div>
+          <div class="cons-metric-block">
+            <div class="cons-metric-label">⚠️ IDs em Risco</div>
+            <div class="cons-metric-val">112</div>
+            <div class="cons-metric-sub">$ 10,6k</div>
+          </div>
+        </div>
+        <div class="cons-ufs"><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#888780"></span>PR</span><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#888780"></span>RS</span><span class="cons-uf-tag"><span class="cons-uf-dot" style="background:#888780"></span>SC</span></div>
+      </div>
+
+    </div>
+  </div>
+
   <div><div class="carrier-tabs"><div class="carrier-tab active" style="background:#F5C518;border-color:#F5C518;color:#1A1D3B;" onclick="showCarrier('JeT_EXPRESS_BRAZIL',this)"><div class="tab-dot" style="background:#fff"></div>J&T EXPRESS<span class="tab-ids">89.961 IDs</span></div>
 <div class="carrier-tab"  onclick="showCarrier('JAD_LOGISTICA_LTDA',this)"><div class="tab-dot" style="background:#1D9E75"></div>JAD LOGISTICA<span class="tab-ids">2.997 IDs</span></div>
 <div class="carrier-tab"  onclick="showCarrier('IMILE_DELIVERY',this)"><div class="tab-dot" style="background:#7b6fd4"></div>IMILE DELIVERY<span class="tab-ids">11.580 IDs</span></div>
