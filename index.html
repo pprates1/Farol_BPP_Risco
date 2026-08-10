@@ -65,37 +65,46 @@
   .cons-uf-tag{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--muted);font-weight:600}
   .cons-uf-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
 
+  
   .rev-card{background:var(--white);border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,.07);overflow:hidden}
-  .rev-header{padding:16px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;background:linear-gradient(135deg,#f8f9ff 0%,var(--white) 100%)}
-  .rev-title{font-size:14px;font-weight:700;color:var(--navy)}
-  .rev-subtitle{font-size:12px;color:var(--muted);margin-top:3px}
-  .rev-badge{background:var(--navy);color:#fff;font-size:10px;font-weight:700;border-radius:20px;padding:4px 12px;white-space:nowrap}
-  .rev-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-bottom:1px solid var(--border)}
-  .rev-kpi{padding:20px 24px;border-right:1px solid var(--border);display:flex;flex-direction:column;gap:4px}
-  .rev-kpi:last-child{border-right:none}
-  .rev-kpi-icon{font-size:18px}
-  .rev-kpi-val{font-size:32px;font-weight:900;line-height:1}
-  .rev-kpi-lbl{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
-  .rev-kpi-sub{font-size:11px;color:var(--muted)}
-  .rev-kpi-gmv{font-size:12px;font-weight:700;margin-top:4px}
-  .rev-kpi-ok .rev-kpi-val{color:#27AE60}.rev-kpi-ok .rev-kpi-lbl{color:#27AE60}.rev-kpi-ok .rev-kpi-gmv{color:#27AE60}
-  .rev-kpi-critico .rev-kpi-val{color:var(--critico)}.rev-kpi-critico .rev-kpi-lbl{color:var(--critico)}.rev-kpi-critico .rev-kpi-gmv{color:var(--critico)}
-  .rev-kpi-risco .rev-kpi-val{color:var(--alto)}.rev-kpi-risco .rev-kpi-lbl{color:var(--alto)}.rev-kpi-risco .rev-kpi-gmv{color:var(--alto)}
-  .rev-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
-  .rev-detail-block{padding:16px 24px;border-right:1px solid var(--border)}
-  .rev-detail-block:last-child{border-right:none}
-  .rev-detail-title{font-size:12px;font-weight:700;color:var(--navy);margin-bottom:12px;text-transform:uppercase;letter-spacing:.4px}
-  .rev-table-header{display:grid;grid-template-columns:140px 1fr 60px 80px;gap:8px;padding:6px 0;border-bottom:1px solid var(--border);margin-bottom:4px}
-  .rev-row{display:grid;grid-template-columns:140px 1fr 60px 80px;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)}
-  .rev-row:last-child{border-bottom:none}
-  .rev-dot-wrap{display:flex;align-items:center;gap:6px}
-  .rev-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-  .rev-label{font-size:12px;font-weight:600;color:var(--text)}
-  .rev-bar-wrap{min-width:0}
-  .rev-bar-outer{height:6px;background:var(--border);border-radius:3px;width:100%}
-  .rev-bar-inner{height:100%;border-radius:3px}
-  .rev-ids{font-size:12px;font-weight:700;color:var(--navy);text-align:right}
-  .rev-gmv{font-size:11px;color:var(--muted);text-align:right}
+  .rev-header{padding:13px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  .rev-title{font-size:13px;font-weight:700;color:var(--navy)}
+  .rev-subtitle{font-size:11px;color:var(--muted);margin-top:2px}
+  .rev-badge{background:var(--navy);color:#fff;font-size:10px;font-weight:700;border-radius:20px;padding:3px 10px}
+  .rev-grid3{display:grid;grid-template-columns:1fr 1.6fr 1.3fr;gap:0;min-height:0}
+  .rev-panel{padding:14px 18px;border-right:1px solid var(--border);display:flex;flex-direction:column;gap:8px;min-width:0}
+  .rev-panel-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);padding-bottom:6px;border-bottom:1px solid var(--border)}
+  .rev-kpi-row{display:flex;flex-direction:column;gap:6px}
+  .rev-kpi-mini{padding:10px 12px;border-radius:8px;border-left:3px solid transparent}
+  .rev-kpi-mini-val{font-size:20px;font-weight:900;line-height:1}
+  .rev-kpi-mini-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;margin-top:2px}
+  .rev-kpi-mini-sub{font-size:10px;color:var(--muted);margin-top:1px}
+  .rev-ok{background:#F0FBF4;border-left-color:#27AE60}.rev-ok .rev-kpi-mini-val{color:#27AE60}.rev-ok .rev-kpi-mini-lbl{color:#27AE60}
+  .rev-critico{background:#FEF2F2;border-left-color:#C0392B}.rev-critico .rev-kpi-mini-val{color:#C0392B}.rev-critico .rev-kpi-mini-lbl{color:#C0392B}
+  .rev-risco{background:#FFFBEB;border-left-color:#E67E22}.rev-risco .rev-kpi-mini-val{color:#E67E22}.rev-risco .rev-kpi-mini-lbl{color:#E67E22}
+  .rev-comp-bar-wrap{margin-top:4px}
+  .rev-comp-bar{display:flex;height:8px;border-radius:4px;overflow:hidden;gap:1px}
+  .rev-comp-legend{display:flex;gap:10px;margin-top:5px;flex-wrap:wrap}
+  .rev-comp-legend span{display:flex;align-items:center;gap:4px;font-size:9px;color:var(--muted);font-weight:600}
+  .rev-comp-legend i{display:inline-block;width:8px;height:8px;border-radius:2px;flex-shrink:0}
+  .rev-col-header{display:grid;grid-template-columns:70px 1fr 36px 52px;gap:4px;padding-bottom:5px;border-bottom:1px solid var(--border);font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.3px}
+  .rev-col-header span:nth-child(3),.rev-col-header span:nth-child(4){text-align:right}
+  .rev-sub-block{border-bottom:1px solid var(--border);padding:6px 0}
+  .rev-sub-block:last-child{border-bottom:none}
+  .rev-sub-header2{display:grid;grid-template-columns:70px 1fr 36px 52px;gap:4px;align-items:center}
+  .rev-tag{font-size:9px;font-weight:700;border-radius:4px;padding:2px 6px;text-align:center;white-space:nowrap}
+  .rev-carriers-wrap{padding:4px 0 0 8px;display:flex;flex-direction:column;gap:2px}
+  .rev-car-row{display:grid;grid-template-columns:8px 90px 1fr 36px 52px;gap:4px;align-items:center}
+  .rev-car-row span:nth-child(2){font-size:9px;color:var(--muted);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .rev-n{font-size:10px;font-weight:700;color:var(--navy);text-align:right}
+  .rev-v{font-size:9px;color:var(--muted);text-align:right}
+  .rev-bar-outer{height:4px;background:#F3F4F6;border-radius:2px}
+  .rev-bar-inner{height:100%;border-radius:2px}
+  .rev-dot2{display:inline-block;width:7px;height:7px;border-radius:50%;flex-shrink:0}
+  .rev-car-block{border-bottom:1px solid var(--border);padding:7px 0}
+  .rev-car-block:last-child{border-bottom:none}
+  .rev-car-main{display:grid;grid-template-columns:12px 1fr 1fr 36px 52px;gap:6px;align-items:center}
+  .rev-car-name{font-size:11px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
 </style>
 </head>
@@ -185,8 +194,6 @@
 <div class="week-block"><div class="week-header" onclick="toggleWeek(this)"><div class="week-title"><span>W34</span><span class="week-pill pill-moderado">🔵 Moderado</span><span style="font-size:12px;color:var(--muted)">18–24 ago</span></div><div class="week-kpis"><span>IDs: <strong>39</strong></span><span>GMV: <strong>$ 3,9k</strong></span><button class="btn-dl" onclick="event.stopPropagation();downloadCSV('CARVALIMA','W34')">⬇ CSV</button><i class="chevron">▾</i></div></div><div class="week-body hidden"><table><thead><tr><th>UF</th><th class="num-right">IDs</th><th>GMV (USD)</th><th class="num-right">%</th></tr></thead><tbody><tr><td class="uf-name">Pará</td><td class="num-right">15</td><td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:65%;background:#2980B9"></div></div>$ 2,5k</div></td><td class="num-right">64.5%</td></tr><tr><td class="uf-name">Mato Grosso</td><td class="num-right">11</td><td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:14%;background:#2980B9"></div></div>$ 539</div></td><td class="num-right">13.7%</td></tr><tr><td class="uf-name">Rondônia</td><td class="num-right">10</td><td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:13%;background:#2980B9"></div></div>$ 528</div></td><td class="num-right">13.4%</td></tr><tr><td class="uf-name">Mato Grosso do Sul</td><td class="num-right">3</td><td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:8%;background:#2980B9"></div></div>$ 330</div></td><td class="num-right">8.4%</td></tr></tbody></table></div></div>
 <div class="week-block"><div class="week-header" onclick="toggleWeek(this)"><div class="week-title"><span>W35</span><span class="week-pill pill-moderado">🔵 Moderado</span><span style="font-size:12px;color:var(--muted)">25–31 ago</span></div><div class="week-kpis"><span>IDs: <strong>62</strong></span><span>GMV: <strong>$ 4,8k</strong></span><button class="btn-dl" onclick="event.stopPropagation();downloadCSV('CARVALIMA','W35')">⬇ CSV</button><i class="chevron">▾</i></div></div><div class="week-body hidden"><table><thead><tr><th>UF</th><th class="num-right">IDs</th><th>GMV (USD)</th><th class="num-right">%</th></tr></thead><tbody><tr><td class="uf-name">Mato Grosso</td><td class="num-right">20</td><td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:35%;background:#2980B9"></div></div>$ 1,7k</div></td><td class="num-right">35.0%</td></tr><tr><td class="uf-name">Pará</td><td class="num-right">14</td><td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:30%;background:#2980B9"></div></div>$ 1,5k</div></td><td class="num-right">30.5%</td></tr><tr><td class="uf-name">Rondônia</td><td class="num-right">22</td><td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:27%;background:#2980B9"></div></div>$ 1,3k</div></td><td class="num-right">27.5%</td></tr><tr><td class="uf-name">Mato Grosso do Sul</td><td class="num-right">4</td><td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:6%;background:#2980B9"></div></div>$ 308</div></td><td class="num-right">6.4%</td></tr><tr><td class="uf-name">Amazonas</td><td class="num-right">1</td><td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:0%;background:#2980B9"></div></div>$ 15</div></td><td class="num-right">0.3%</td></tr><tr><td class="uf-name">Acre</td><td class="num-right">1</td><td><div class="bar-wrap"><div class="bar-outer"><div class="bar-inner" style="width:0%;background:#2980B9"></div></div>$ 15</div></td><td class="num-right">0.3%</td></tr></tbody></table></div></div>
 </div>
-
-
   <!-- ANÁLISE DE REVERSÃO -->
   <div class="rev-card">
     <div class="rev-header">
@@ -197,119 +204,105 @@
       <div class="rev-badge">Referência: 10/08/2026</div>
     </div>
 
-    <!-- 3 KPIs de reversão -->
-    <div class="rev-kpis">
-      <div class="rev-kpi rev-kpi-ok">
-        <div class="rev-kpi-icon">✅</div>
-        <div class="rev-kpi-val">69.618</div>
-        <div class="rev-kpi-lbl">IDs Revertidos</div>
-        <div class="rev-kpi-sub">Saíram sem virar BPP · 67,6% do universo</div>
-        <div class="rev-kpi-gmv">$ 1,4M em risco evitado</div>
-      </div>
-      <div class="rev-kpi rev-kpi-critico">
-        <div class="rev-kpi-icon">🔴</div>
-        <div class="rev-kpi-val">1.978</div>
-        <div class="rev-kpi-lbl">IDs Viraram BPP</div>
-        <div class="rev-kpi-sub">Efetivados em W32/W33 · 1,9% do universo</div>
-        <div class="rev-kpi-gmv">$ 43,9k cashout</div>
-      </div>
-      <div class="rev-kpi rev-kpi-risco">
-        <div class="rev-kpi-icon">⚠️</div>
-        <div class="rev-kpi-val">112.157</div>
-        <div class="rev-kpi-lbl">Ainda em Risco</div>
-        <div class="rev-kpi-sub">Base atual monitorada</div>
-        <div class="rev-kpi-gmv">$ 2,7M GMV em risco</div>
-      </div>
-    </div>
+    <div class="rev-grid3">
 
-    <!-- Detalhamento lado a lado -->
-    <div class="rev-detail-grid">
-      <div class="rev-detail-block">
-        <div class="rev-detail-title">🔴 Por Substatus — IDs que viraram BPP</div>
-        <div class="rev-table-header">
-          <span class="rev-label">Substatus</span>
-          <span></span>
-          <span class="rev-ids" style="font-size:10px;font-weight:700;color:var(--muted)">IDs</span>
-          <span class="rev-gmv" style="font-size:10px;font-weight:700;color:var(--muted)">Cashout</span>
+      <!-- PAINEL 1: KPIs -->
+      <div class="rev-panel">
+        <div class="rev-panel-title">Visão Geral</div>
+        <div class="rev-kpi-row">
+          <div class="rev-kpi-mini rev-ok">
+            <div class="rev-kpi-mini-val">69.618</div>
+            <div class="rev-kpi-mini-lbl">IDs Revertidos</div>
+            <div class="rev-kpi-mini-sub">67,6% · $ 1,4M evitado</div>
+          </div>
+          <div class="rev-kpi-mini rev-critico">
+            <div class="rev-kpi-mini-val">1.978</div>
+            <div class="rev-kpi-mini-lbl">Viraram BPP</div>
+            <div class="rev-kpi-mini-sub">1,9% · $ 43,9k cashout</div>
+          </div>
+          <div class="rev-kpi-mini rev-risco">
+            <div class="rev-kpi-mini-val">112.157</div>
+            <div class="rev-kpi-mini-lbl">Ainda em Risco</div>
+            <div class="rev-kpi-mini-sub">Base atual · $ 2,7M</div>
+          </div>
         </div>
-        <div class="rev-row">
-      <div class="rev-label">DELAYED</div>
-      <div class="rev-bar-wrap"><div class="rev-bar-outer"><div class="rev-bar-inner" style="width:51%;background:#e34948"></div></div></div>
-      <div class="rev-ids">540</div>
-      <div class="rev-gmv">$ 21,025</div>
-    </div>
-<div class="rev-row">
-      <div class="rev-label">STOLEN</div>
-      <div class="rev-bar-wrap"><div class="rev-bar-outer"><div class="rev-bar-inner" style="width:100%;background:#7b6fd4"></div></div></div>
-      <div class="rev-ids">1,050</div>
-      <div class="rev-gmv">$ 13,866</div>
-    </div>
-<div class="rev-row">
-      <div class="rev-label">DAMAGED</div>
-      <div class="rev-bar-wrap"><div class="rev-bar-outer"><div class="rev-bar-inner" style="width:31%;background:#2a78d6"></div></div></div>
-      <div class="rev-ids">325</div>
-      <div class="rev-gmv">$ 5,017</div>
-    </div>
-<div class="rev-row">
-      <div class="rev-label">LOST</div>
-      <div class="rev-bar-wrap"><div class="rev-bar-outer"><div class="rev-bar-inner" style="width:4%;background:#4a3aa7"></div></div></div>
-      <div class="rev-ids">42</div>
-      <div class="rev-gmv">$ 3,038</div>
-    </div>
-<div class="rev-row">
-      <div class="rev-label">FRAUD</div>
-      <div class="rev-bar-wrap"><div class="rev-bar-outer"><div class="rev-bar-inner" style="width:8%;background:#1baf7a"></div></div></div>
-      <div class="rev-ids">86</div>
-      <div class="rev-gmv">$ 1,013</div>
-    </div>
-
-      </div>
-      <div class="rev-detail-block">
-        <div class="rev-detail-title">🔴 Por Carrier — IDs que viraram BPP</div>
-        <div class="rev-table-header">
-          <span class="rev-label" style="padding-left:20px">Carrier</span>
-          <span></span>
-          <span class="rev-ids" style="font-size:10px;font-weight:700;color:var(--muted)">IDs</span>
-          <span class="rev-gmv" style="font-size:10px;font-weight:700;color:var(--muted)">Cashout</span>
+        <!-- barra de composição -->
+        <div class="rev-comp-bar-wrap">
+          <div class="rev-comp-bar">
+            <div style="width:67.6%;background:#27AE60;border-radius:4px 0 0 4px"></div>
+            <div style="width:1.9%;background:#C0392B"></div>
+            <div style="width:30.5%;background:#E5E7EB;border-radius:0 4px 4px 0"></div>
+          </div>
+          <div class="rev-comp-legend">
+            <span><i style="background:#27AE60"></i>Revertidos 67,6%</span>
+            <span><i style="background:#C0392B"></i>BPP 1,9%</span>
+            <span><i style="background:#D1D5DB"></i>Em risco</span>
+          </div>
         </div>
-        <div class="rev-row">
-      <div class="rev-dot-wrap"><span class="rev-dot" style="background:#F5C518"></span><div class="rev-label">J&T EXPRESS BRAZIL</div></div>
-      <div class="rev-bar-wrap"><div class="rev-bar-outer"><div class="rev-bar-inner" style="width:100%;background:#F5C518"></div></div></div>
-      <div class="rev-ids">1,618</div>
-      <div class="rev-gmv">$ 22,019</div>
-    </div>
-<div class="rev-row">
-      <div class="rev-dot-wrap"><span class="rev-dot" style="background:#7b6fd4"></span><div class="rev-label">IMILE DELIVERY</div></div>
-      <div class="rev-bar-wrap"><div class="rev-bar-outer"><div class="rev-bar-inner" style="width:23%;background:#7b6fd4"></div></div></div>
-      <div class="rev-ids">375</div>
-      <div class="rev-gmv">$ 16,598</div>
-    </div>
-<div class="rev-row">
-      <div class="rev-dot-wrap"><span class="rev-dot" style="background:#1D9E75"></span><div class="rev-label">JAD LOGISTICA LTDA</div></div>
-      <div class="rev-bar-wrap"><div class="rev-bar-outer"><div class="rev-bar-inner" style="width:1%;background:#1D9E75"></div></div></div>
-      <div class="rev-ids">20</div>
-      <div class="rev-gmv">$ 1,452</div>
-    </div>
-<div class="rev-row">
-      <div class="rev-dot-wrap"><span class="rev-dot" style="background:#888780"></span><div class="rev-label">CARVALIMA</div></div>
-      <div class="rev-bar-wrap"><div class="rev-bar-outer"><div class="rev-bar-inner" style="width:1%;background:#888780"></div></div></div>
-      <div class="rev-ids">16</div>
-      <div class="rev-gmv">$ 2,846</div>
-    </div>
-<div class="rev-row">
-      <div class="rev-dot-wrap"><span class="rev-dot" style="background:#E8821A"></span><div class="rev-label">LOGGI</div></div>
-      <div class="rev-bar-wrap"><div class="rev-bar-outer"><div class="rev-bar-inner" style="width:1%;background:#E8821A"></div></div></div>
-      <div class="rev-ids">12</div>
-      <div class="rev-gmv">$ 402</div>
-    </div>
-<div class="rev-row">
-      <div class="rev-dot-wrap"><span class="rev-dot" style="background:#D85A30"></span><div class="rev-label">DOMINALOG EXPRESS</div></div>
-      <div class="rev-bar-wrap"><div class="rev-bar-outer"><div class="rev-bar-inner" style="width:0%;background:#D85A30"></div></div></div>
-      <div class="rev-ids">2</div>
-      <div class="rev-gmv">$ 641</div>
-    </div>
-
       </div>
+
+      <!-- PAINEL 2: Por Substatus -->
+      <div class="rev-panel">
+        <div class="rev-panel-title">Por Substatus — IDs que viraram BPP</div>
+        <div class="rev-col-header">
+          <span>Substatus</span><span></span><span>IDs</span><span>Cashout</span>
+        </div>
+        <div class="rev-sub-block">
+          <div class="rev-sub-header2"><span class="rev-tag" style="background:#F3F4F6;color:#374151">DELAYED</span><div class="rev-bar-outer"><div class="rev-bar-inner" style="width:51%;background:#9CA3AF"></div></div><span class="rev-n">540</span><span class="rev-v">$ 21,0k</span></div>
+          <div class="rev-carriers-wrap">
+            <div class="rev-car-row"><span class="rev-dot2" style="background:#7b6fd4"></span><span>IMILE DELIVERY</span><div class="rev-bar-outer"><div class="rev-bar-inner" style="width:59%;background:#7b6fd4;opacity:.5"></div></div><span class="rev-n">319</span><span class="rev-v">$ 14,2k</span></div>
+            <div class="rev-car-row"><span class="rev-dot2" style="background:#F5C518"></span><span>J&T EXPRESS</span><div class="rev-bar-outer"><div class="rev-bar-inner" style="width:37%;background:#F5C518;opacity:.5"></div></div><span class="rev-n">200</span><span class="rev-v">$ 4,3k</span></div>
+            <div class="rev-car-row"><span class="rev-dot2" style="background:#888780"></span><span>CARVALIMA</span><div class="rev-bar-outer"><div class="rev-bar-inner" style="width:2%;background:#888780;opacity:.5"></div></div><span class="rev-n">9</span><span class="rev-v">$ 1,3k</span></div>
+            <div class="rev-car-row"><span class="rev-dot2" style="background:#1D9E75"></span><span>JAD LOGISTICA</span><div class="rev-bar-outer"><div class="rev-bar-inner" style="width:1%;background:#1D9E75;opacity:.5"></div></div><span class="rev-n">7</span><span class="rev-v">$ 515</span></div>
+            <div class="rev-car-row"><span class="rev-dot2" style="background:#E8821A"></span><span>LOGGI</span><div class="rev-bar-outer"><div class="rev-bar-inner" style="width:1%;background:#E8821A;opacity:.5"></div></div><span class="rev-n">3</span><span class="rev-v">$ 21</span></div>
+            <div class="rev-car-row"><span class="rev-dot2" style="background:#D85A30"></span><span>DOMINALOG</span><div class="rev-bar-outer"><div class="rev-bar-inner" style="width:1%;background:#D85A30;opacity:.5"></div></div><span class="rev-n">2</span><span class="rev-v">$ 641</span></div>
+          </div>
+        </div>
+        <div class="rev-sub-block">
+          <div class="rev-sub-header2"><span class="rev-tag" style="background:#F3F4F6;color:#374151">STOLEN</span><div class="rev-bar-outer"><div class="rev-bar-inner" style="width:100%;background:#9CA3AF"></div></div><span class="rev-n">1.050</span><span class="rev-v">$ 13,9k</span></div>
+          <div class="rev-carriers-wrap">
+            <div class="rev-car-row"><span class="rev-dot2" style="background:#F5C518"></span><span>J&T EXPRESS</span><div class="rev-bar-outer"><div class="rev-bar-inner" style="width:100%;background:#F5C518;opacity:.5"></div></div><span class="rev-n">1.050</span><span class="rev-v">$ 13,9k</span></div>
+          </div>
+        </div>
+        <div class="rev-sub-block">
+          <div class="rev-sub-header2"><span class="rev-tag" style="background:#F3F4F6;color:#374151">DAMAGED</span><div class="rev-bar-outer"><div class="rev-bar-inner" style="width:31%;background:#9CA3AF"></div></div><span class="rev-n">325</span><span class="rev-v">$ 5,0k</span></div>
+          <div class="rev-carriers-wrap">
+            <div class="rev-car-row"><span class="rev-dot2" style="background:#F5C518"></span><span>J&T EXPRESS</span><div class="rev-bar-outer"><div class="rev-bar-inner" style="width:87%;background:#F5C518;opacity:.5"></div></div><span class="rev-n">284</span><span class="rev-v">$ 3,0k</span></div>
+            <div class="rev-car-row"><span class="rev-dot2" style="background:#7b6fd4"></span><span>IMILE DELIVERY</span><div class="rev-bar-outer"><div class="rev-bar-inner" style="width:8%;background:#7b6fd4;opacity:.5"></div></div><span class="rev-n">27</span><span class="rev-v">$ 920</span></div>
+            <div class="rev-car-row"><span class="rev-dot2" style="background:#1D9E75"></span><span>JAD LOGISTICA</span><div class="rev-bar-outer"><div class="rev-bar-inner" style="width:2%;background:#1D9E75;opacity:.5"></div></div><span class="rev-n">7</span><span class="rev-v">$ 293</span></div>
+          </div>
+        </div>
+        <div class="rev-sub-block">
+          <div class="rev-sub-header2"><span class="rev-tag" style="background:#F3F4F6;color:#374151">LOST</span><div class="rev-bar-outer"><div class="rev-bar-inner" style="width:4%;background:#9CA3AF"></div></div><span class="rev-n">42</span><span class="rev-v">$ 3,0k</span></div>
+          <div class="rev-carriers-wrap">
+            <div class="rev-car-row"><span class="rev-dot2" style="background:#7b6fd4"></span><span>IMILE DELIVERY</span><div class="rev-bar-outer"><div class="rev-bar-inner" style="width:60%;background:#7b6fd4;opacity:.5"></div></div><span class="rev-n">25</span><span class="rev-v">$ 1,3k</span></div>
+            <div class="rev-car-row"><span class="rev-dot2" style="background:#1D9E75"></span><span>JAD LOGISTICA</span><div class="rev-bar-outer"><div class="rev-bar-inner" style="width:14%;background:#1D9E75;opacity:.5"></div></div><span class="rev-n">6</span><span class="rev-v">$ 643</span></div>
+            <div class="rev-car-row"><span class="rev-dot2" style="background:#888780"></span><span>CARVALIMA</span><div class="rev-bar-outer"><div class="rev-bar-inner" style="width:10%;background:#888780;opacity:.5"></div></div><span class="rev-n">4</span><span class="rev-v">$ 950</span></div>
+          </div>
+        </div>
+        <div class="rev-sub-block">
+          <div class="rev-sub-header2"><span class="rev-tag" style="background:#F3F4F6;color:#374151">FRAUD</span><div class="rev-bar-outer"><div class="rev-bar-inner" style="width:8%;background:#9CA3AF"></div></div><span class="rev-n">86</span><span class="rev-v">$ 1,0k</span></div>
+          <div class="rev-carriers-wrap">
+            <div class="rev-car-row"><span class="rev-dot2" style="background:#F5C518"></span><span>J&T EXPRESS</span><div class="rev-bar-outer"><div class="rev-bar-inner" style="width:92%;background:#F5C518;opacity:.5"></div></div><span class="rev-n">79</span><span class="rev-v">$ 793</span></div>
+            <div class="rev-car-row"><span class="rev-dot2" style="background:#7b6fd4"></span><span>IMILE DELIVERY</span><div class="rev-bar-outer"><div class="rev-bar-inner" style="width:5%;background:#7b6fd4;opacity:.5"></div></div><span class="rev-n">4</span><span class="rev-v">$ 164</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PAINEL 3: Por Carrier -->
+      <div class="rev-panel" style="border-right:none">
+        <div class="rev-panel-title">Por Carrier — IDs que viraram BPP</div>
+        <div class="rev-col-header">
+          <span>Carrier</span><span></span><span>IDs</span><span>Cashout</span>
+        </div>
+        <div class="rev-car-block"><div class="rev-car-main"><span class="rev-dot2" style="background:#F5C518;width:10px;height:10px"></span><span class="rev-car-name">J&T EXPRESS BRAZIL</span><div class="rev-bar-outer"><div class="rev-bar-inner" style="width:100%;background:#F5C518"></div></div><span class="rev-n">1.618</span><span class="rev-v">$ 22,0k</span></div></div>
+        <div class="rev-car-block"><div class="rev-car-main"><span class="rev-dot2" style="background:#7b6fd4;width:10px;height:10px"></span><span class="rev-car-name">IMILE DELIVERY</span><div class="rev-bar-outer"><div class="rev-bar-inner" style="width:23%;background:#7b6fd4"></div></div><span class="rev-n">375</span><span class="rev-v">$ 16,6k</span></div></div>
+        <div class="rev-car-block"><div class="rev-car-main"><span class="rev-dot2" style="background:#888780;width:10px;height:10px"></span><span class="rev-car-name">CARVALIMA</span><div class="rev-bar-outer"><div class="rev-bar-inner" style="width:1%;background:#888780"></div></div><span class="rev-n">16</span><span class="rev-v">$ 2,8k</span></div></div>
+        <div class="rev-car-block"><div class="rev-car-main"><span class="rev-dot2" style="background:#1D9E75;width:10px;height:10px"></span><span class="rev-car-name">JAD LOGISTICA LTDA</span><div class="rev-bar-outer"><div class="rev-bar-inner" style="width:1%;background:#1D9E75"></div></div><span class="rev-n">20</span><span class="rev-v">$ 1,5k</span></div></div>
+        <div class="rev-car-block"><div class="rev-car-main"><span class="rev-dot2" style="background:#E8821A;width:10px;height:10px"></span><span class="rev-car-name">LOGGI</span><div class="rev-bar-outer"><div class="rev-bar-inner" style="width:1%;background:#E8821A"></div></div><span class="rev-n">12</span><span class="rev-v">$ 402</span></div></div>
+        <div class="rev-car-block"><div class="rev-car-main"><span class="rev-dot2" style="background:#D85A30;width:10px;height:10px"></span><span class="rev-car-name">DOMINALOG EXPRESS</span><div class="rev-bar-outer"><div class="rev-bar-inner" style="width:1%;background:#D85A30"></div></div><span class="rev-n">2</span><span class="rev-v">$ 641</span></div></div>
+      </div>
+
     </div>
   </div>
 
