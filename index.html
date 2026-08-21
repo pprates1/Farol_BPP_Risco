@@ -196,12 +196,20 @@ function toggleWeek(h){
   const b=h.parentElement.querySelector('.week-body');
   const hid=b.classList.toggle('hidden');h.classList.toggle('collapsed',hid);
 }
+function classificaSemana(semana){
+  const n=parseInt(String(semana).replace(/\D/g,''),10);
+  if(isNaN(n))return'';
+  if(n<=33)return'Vencido';
+  if(n===34)return'Atenção';
+  return'Moderado';
+}
 function downloadCarrier(carrier){
   const key=CARRIER_KEY_MAP[carrier]||carrier;
   const rows=CSV_DATA[key];
   if(!rows||!rows.length)return;
-  const cols=Object.keys(rows[0]);
-  const csv='\uFEFF'+cols.join(';')+'\n'+rows.map(r=>cols.map(c=>'"'+String(r[c]||'').replace(/"/g,'""')+'"').join(';')).join('\n');
+  const cols=[...Object.keys(rows[0]),'CLASSIFICACAO'];
+  const enriched=rows.map(r=>({...r,CLASSIFICACAO:classificaSemana(r.SEMANA)}));
+  const csv='\uFEFF'+cols.join(';')+'\n'+enriched.map(r=>cols.map(c=>'"'+String(r[c]||'').replace(/"/g,'""')+'"').join(';')).join('\n');
   const a=document.createElement('a');
   a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8;'}));
   a.download='BPP_'+key+'.csv';a.click();
